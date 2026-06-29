@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIRE 473 · Chapter 14 — Funding the Multinational Firm</title>
+<style>
+:root{
+  --cerulean:#0492C2;
+  --cer-dark:#036E92;
+  --cer-deep:#023A4D;
+  --cer-deeper:#012A38;
+  --cer-light:#4FB3D4;
+  --cer-pale:#DCEFF6;
+  --cer-paler:#EEF7FB;
+  --ink:#0B2730;
+  --slate:#4C6670;
+  --muted:#7E929B;
+  --line:#D4E6EC;
+  --paper:#FFFFFF;
+  --canvas:#F3FAFC;
+  --gold:#E2912A;
+  --gold-dark:#BE7818;
+  --good:#1F9D6B;
+  --good-d:#157A52;
+  --bad:#D24B47;
+  --bad-d:#A8332F;
+  --shadow:0 12px 34px rgba(2,58,77,.14);
+  --shadow-sm:0 4px 14px rgba(2,58,77,.10);
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#06141b;
+  font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;}
+#stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:
+    radial-gradient(1200px 700px at 18% -10%, #064b62 0%, transparent 55%),
+    radial-gradient(900px 600px at 100% 120%, #045a76 0%, transparent 50%),
+    linear-gradient(160deg,#03323f 0%,#06141b 70%);}
+#deck{width:1280px;height:720px;position:relative;transform-origin:center center;
+  background:var(--canvas);box-shadow:0 30px 80px rgba(0,0,0,.55);border-radius:6px;overflow:hidden;}
+
+/* ---------- slide base ---------- */
+.slide{position:absolute;inset:0;display:none;flex-direction:column;
+  padding:54px 64px 64px;background:var(--canvas);}
+.slide.active{display:flex;animation:slideIn .36s cubic-bezier(.22,.7,.3,1);}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+
+/* ---------- shared type ---------- */
+.eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);
+  font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--cerulean);font-weight:700;margin-bottom:14px;}
+.eyebrow .sec{background:var(--cerulean);color:#fff;padding:3px 9px;border-radius:4px;letter-spacing:.06em;}
+.eyebrow .dot{flex:1;height:1px;background:linear-gradient(90deg,var(--cer-pale),transparent);}
+.title{font-family:var(--serif);font-weight:700;font-size:40px;line-height:1.08;color:var(--cer-deep);margin:0 0 6px;letter-spacing:-.01em;}
+.title.sm{font-size:33px;}
+.subtitle{font-size:18px;color:var(--slate);margin:2px 0 18px;max-width:1000px;line-height:1.45;}
+.lede{font-size:20px;line-height:1.5;color:var(--ink);max-width:960px;}
+p{margin:0 0 12px;}
+
+/* ---------- bullets (position-based, grid-safe) ---------- */
+ul.clean{list-style:none;margin:0;padding:0;}
+ul.clean li{position:relative;padding-left:28px;margin-bottom:13px;font-size:18px;line-height:1.46;color:var(--ink);}
+ul.clean li::before{content:"";position:absolute;left:2px;top:8px;width:9px;height:9px;
+  background:var(--cerulean);transform:rotate(45deg);border-radius:1.5px;}
+ul.clean li b,ul.clean li strong{color:var(--cer-dark);}
+ul.clean.tight li{margin-bottom:8px;font-size:16.5px;}
+ul.clean.dash li::before{background:var(--gold);}
+
+/* ---------- layout helpers ---------- */
+.cols{display:flex;gap:30px;flex:1;min-height:0;}
+.col{flex:1;min-width:0;}
+.col.narrow{flex:.74;}
+.col.wide{flex:1.4;}
+.row{display:flex;gap:18px;}
+.grow{flex:1;}
+.center{align-items:center;}
+.fill{flex:1;min-height:0;}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:20px 22px;box-shadow:var(--shadow-sm);}
+.card.flush{padding:0;overflow:hidden;}
+.card h3{font-family:var(--sans);font-size:15px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--cer-dark);margin:0 0 12px;font-weight:800;}
+.card .lab-em{color:var(--cerulean);}
+
+.panel{background:linear-gradient(180deg,#fff,#fbfdff);border:1px solid var(--line);border-radius:12px;padding:18px 20px;}
+.tint{background:var(--cer-paler);border:1px solid var(--cer-pale);border-radius:12px;padding:18px 20px;}
+
+.callout{border-left:4px solid var(--cerulean);background:var(--cer-paler);
+  padding:14px 18px;border-radius:0 10px 10px 0;font-size:17px;color:var(--ink);line-height:1.45;}
+.callout.gold{border-left-color:var(--gold);background:#fdf6ea;}
+.callout .who{display:block;font-size:13px;color:var(--muted);margin-top:6px;font-style:italic;}
+
+.note{font-size:14px;color:var(--muted);line-height:1.4;}
+
+.formula{font-family:var(--mono);background:var(--cer-deep);color:#dff1f8;border-radius:10px;
+  padding:16px 20px;font-size:17px;line-height:1.7;letter-spacing:.01em;}
+.formula .hi{color:var(--cer-light);font-weight:700;}
+.formula .gold{color:#f4c87f;font-weight:700;}
+
+.chip{font-family:var(--mono);font-size:13px;background:var(--cer-pale);color:var(--cer-dark);
+  padding:3px 8px;border-radius:5px;font-weight:700;white-space:nowrap;}
+.tag{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  padding:4px 10px;border-radius:20px;background:var(--cer-pale);color:var(--cer-dark);}
+.tag.gold{background:#f7e7cb;color:var(--gold-dark);}
+.tag.green{background:#d4efe3;color:var(--good-d);}
+.tag.red{background:#f6dad9;color:var(--bad-d);}
+
+/* stat blocks */
+.stats{display:flex;gap:16px;flex-wrap:wrap;}
+.stat{flex:1;min-width:120px;background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;box-shadow:var(--shadow-sm);}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:700;color:var(--cerulean);line-height:1;}
+.stat .n.gold{color:var(--gold-dark);}
+.stat .l{font-size:13.5px;color:var(--slate);margin-top:8px;line-height:1.3;}
+
+/* key-value rows */
+.kv{display:flex;flex-direction:column;gap:0;}
+.kv .r{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px dashed var(--line);}
+.kv .r:last-child{border-bottom:none;}
+.kv .k{font-size:15.5px;color:var(--slate);}
+.kv .v{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--ink);}
+
+/* ---------- divider slides ---------- */
+.slide.divider{background:
+   radial-gradient(900px 600px at 80% -20%, #07597328 0%, transparent 60%),
+   linear-gradient(155deg,var(--cer-deep) 0%,var(--cer-deeper) 75%);
+   justify-content:center;padding-left:96px;}
+.divider .snum{font-family:var(--mono);font-size:150px;font-weight:700;color:#0a5d79;line-height:.8;
+  letter-spacing:-.03em;margin-bottom:6px;}
+.divider .deye{font-family:var(--mono);font-size:14px;letter-spacing:.28em;text-transform:uppercase;color:var(--cer-light);margin-bottom:18px;}
+.divider .dtitle{font-family:var(--serif);font-size:54px;font-weight:700;color:#fff;line-height:1.05;max-width:900px;letter-spacing:-.01em;}
+.divider .dsub{font-size:20px;color:#bfe3f0;margin-top:18px;max-width:760px;line-height:1.5;}
+.divider .drule{width:90px;height:5px;background:var(--cerulean);border-radius:3px;margin-top:26px;}
+
+/* ---------- TOOL / LAB ---------- */
+.labtag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--cerulean);padding:5px 11px;border-radius:20px;margin-bottom:12px;}
+.labtag::before{content:"";width:8px;height:8px;border-radius:50%;background:#bdf0a8;box-shadow:0 0 0 3px #ffffff44;}
+.lab{flex:1;display:flex;flex-direction:column;min-height:0;}
+.lab-grid{display:flex;gap:24px;flex:1;min-height:0;}
+.lab-controls{flex:.86;display:flex;flex-direction:column;gap:14px;min-width:0;}
+.lab-viz{flex:1.25;background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--shadow-sm);padding:18px;display:flex;flex-direction:column;min-width:0;position:relative;}
+.hint{font-size:15px;color:var(--slate);background:var(--cer-paler);border:1px dashed var(--cer-pale);
+  border-radius:10px;padding:10px 14px;line-height:1.4;}
+.hint b{color:var(--cer-dark);}
+
+.ctrl{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:13px 16px;box-shadow:var(--shadow-sm);}
+.ctrl .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px;}
+.ctrl .cl{font-size:15px;color:var(--slate);font-weight:600;}
+.ctrl .cv{font-family:var(--mono);font-size:17px;font-weight:700;color:var(--cerulean);}
+.ctrl .cv.gold{color:var(--gold-dark);}
+
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;
+  background:linear-gradient(90deg,var(--cer-light),var(--cer-pale));outline:none;margin:2px 0;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;
+  background:var(--cerulean);border:3px solid #fff;box-shadow:0 2px 7px rgba(2,58,77,.4);cursor:pointer;transition:transform .08s;}
+input[type=range]::-webkit-slider-thumb:active{transform:scale(1.15);}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--cerulean);
+  border:3px solid #fff;box-shadow:0 2px 7px rgba(2,58,77,.4);cursor:pointer;}
+
+.seg{display:flex;gap:6px;background:var(--cer-paler);padding:5px;border-radius:11px;border:1px solid var(--cer-pale);}
+.seg button{flex:1;font-family:var(--sans);font-size:14px;font-weight:700;color:var(--slate);background:transparent;
+  border:none;padding:9px 8px;border-radius:8px;cursor:pointer;transition:.15s;}
+.seg button.on{background:var(--cerulean);color:#fff;box-shadow:0 2px 8px rgba(4,146,194,.4);}
+.seg button:hover:not(.on){background:#fff;color:var(--cer-dark);}
+
+.btn{font-family:var(--sans);font-size:15px;font-weight:700;color:#fff;background:var(--cerulean);border:none;
+  padding:11px 18px;border-radius:9px;cursor:pointer;box-shadow:0 3px 10px rgba(4,146,194,.35);transition:.15s;}
+.btn:hover{background:var(--cer-dark);transform:translateY(-1px);}
+.btn.ghost{background:#fff;color:var(--cer-dark);border:1.5px solid var(--cer-pale);box-shadow:none;}
+.btn.ghost:hover{background:var(--cer-paler);}
+.btn.gold{background:var(--gold);box-shadow:0 3px 10px rgba(226,145,42,.35);}
+.btn.gold:hover{background:var(--gold-dark);}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+
+.readout{background:var(--cer-deep);border-radius:11px;padding:14px 16px;color:#dff1f8;}
+.readout .rr{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid #0a5168;}
+.readout .rr:last-child{border-bottom:none;}
+.readout .rk{font-size:14px;color:#9fd6e6;}
+.readout .rv{font-family:var(--mono);font-size:18px;font-weight:700;color:#fff;}
+.readout .rv.big{font-size:24px;}
+
+.verdict{border-radius:11px;padding:13px 16px;display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px;}
+.verdict .vi{font-size:24px;}
+.verdict.ok{background:#d8f0e6;color:var(--good-d);border:1px solid #a6dcc4;}
+.verdict.no{background:#f7dcdb;color:var(--bad-d);border:1px solid #edb8b6;}
+.verdict.warn{background:#fcefd6;color:var(--gold-dark);border:1px solid #f0d39a;}
+
+.vizhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+.vizhead .vt{font-size:14px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:var(--cer-dark);}
+.vizhead .vs{font-size:13px;color:var(--muted);}
+.viz-svg{flex:1;width:100%;min-height:0;}
+
+/* ---------- ADR flow boxes ---------- */
+.flowbox{fill:#fff;stroke:var(--line);stroke-width:2;}
+.flowbox.on{fill:var(--cer-paler);stroke:var(--cerulean);stroke-width:3;}
+.flowlbl{font-family:var(--sans);font-size:13px;font-weight:700;fill:var(--ink);}
+.flowsub{font-family:var(--sans);font-size:11px;fill:var(--muted);}
+.flowarr{stroke:var(--line);stroke-width:2.5;fill:none;}
+.flowarr.on{stroke:var(--cerulean);stroke-width:4;}
+
+/* ---------- term grid ---------- */
+.terms{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;flex:1;align-content:start;}
+.term{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 13px;cursor:pointer;
+  transition:.14s;box-shadow:var(--shadow-sm);}
+.term:hover{border-color:var(--cerulean);transform:translateY(-2px);box-shadow:var(--shadow);}
+.term .tn{font-family:var(--mono);font-size:14.5px;font-weight:700;color:var(--cer-dark);}
+.term .td{font-size:12.5px;color:var(--slate);margin-top:7px;line-height:1.35;display:none;}
+.term.open{background:var(--cer-paler);border-color:var(--cerulean);}
+.term.open .td{display:block;}
+.term.open .tn{color:var(--cerulean);}
+
+/* ---------- roadmap ---------- */
+.road{display:flex;flex-direction:column;gap:7px;flex:1;}
+.rstep{display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;padding:8px 16px;box-shadow:var(--shadow-sm);}
+.rstep .rn{font-family:var(--mono);font-size:16px;font-weight:700;color:#fff;background:var(--cerulean);
+  width:42px;height:33px;display:flex;align-items:center;justify-content:center;border-radius:7px;flex-shrink:0;}
+.rstep .rt{font-size:15.5px;font-weight:700;color:var(--cer-deep);line-height:1.2;}
+.rstep .rd{font-size:13px;color:var(--slate);line-height:1.25;}
+.rstep.case .rn{background:var(--gold);}
+
+/* ---------- title slide ---------- */
+.slide.cover{background:
+   radial-gradient(1000px 700px at 78% -10%, #0a607c 0%, transparent 55%),
+   linear-gradient(150deg,var(--cer-deep) 0%,var(--cer-deeper) 80%);
+   justify-content:center;padding:0 96px;}
+.cover .ceye{font-family:var(--mono);font-size:15px;letter-spacing:.3em;text-transform:uppercase;color:var(--cer-light);margin-bottom:22px;}
+.cover h1{font-family:var(--serif);font-size:70px;font-weight:700;color:#fff;line-height:1.02;margin:0;letter-spacing:-.015em;max-width:1000px;}
+.cover .csub{font-size:23px;color:#c7e6f1;margin-top:22px;max-width:720px;line-height:1.45;}
+.cover .meta{display:flex;gap:28px;margin-top:40px;align-items:center;}
+.cover .meta .m{font-family:var(--mono);font-size:14px;color:#9fd6e6;letter-spacing:.04em;}
+.cover .meta .sepd{width:5px;height:5px;border-radius:50%;background:var(--cerulean);}
+.cover .crule{width:120px;height:6px;background:var(--cerulean);border-radius:3px;margin-top:34px;}
+
+/* badge for live tools row on cover */
+.livemark{position:absolute;right:96px;bottom:90px;text-align:right;}
+.livemark .lm1{font-family:var(--mono);font-size:54px;font-weight:700;color:var(--cerulean);line-height:1;}
+.livemark .lm2{font-size:14px;color:#9fd6e6;letter-spacing:.1em;text-transform:uppercase;margin-top:8px;}
+
+/* ---------- nav ---------- */
+#nav{position:absolute;bottom:0;left:0;right:0;height:0;}
+.navbar{position:absolute;bottom:18px;right:22px;display:flex;align-items:center;gap:10px;z-index:50;}
+.navbar button{width:38px;height:38px;border-radius:9px;border:none;background:#ffffffee;color:var(--cer-dark);
+  font-size:18px;cursor:pointer;box-shadow:var(--shadow-sm);transition:.13s;display:flex;align-items:center;justify-content:center;}
+.navbar button:hover{background:var(--cerulean);color:#fff;}
+#counter{position:absolute;bottom:24px;left:24px;font-family:var(--mono);font-size:13px;color:var(--muted);z-index:50;letter-spacing:.05em;}
+#counter b{color:var(--cer-dark);}
+#progress{position:absolute;bottom:0;left:0;height:4px;background:var(--cer-pale);width:100%;z-index:60;}
+#progress .bar{height:100%;background:linear-gradient(90deg,var(--cer-light),var(--cerulean));width:0;transition:width .3s;}
+
+/* brand footer on content slides */
+.brand{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.08em;z-index:5;pointer-events:none;}
+.slide.cover .brand,.slide.divider .brand{color:#5b93a8;}
+
+.spacer{flex:1;}
+small.src{display:block;font-size:11.5px;color:var(--muted);margin-top:8px;font-style:italic;}
+</style>
+</head>
+<body>
+<div id="stage">
+<div id="deck">
+
+<!-- ============ S1 COVER ============ -->
+<section class="slide cover active">
+  <div class="ceye">FIRE 473 · International Finance · Part 4</div>
+  <h1>Funding the<br>Multinational Firm</h1>
+  <div class="csub">Globalizing the cost and availability of capital — a live, hands-on walkthrough of Chapter 14.</div>
+  <div class="crule"></div>
+  <div class="meta">
+    <span class="m">Eiteman · Stonehill · Moffett — 16th ed.</span>
+    <span class="sepd"></span>
+    <span class="m">Naomie Bambara</span>
+    <span class="sepd"></span>
+    <span class="m">St. Cloud State University</span>
+  </div>
+  <div class="livemark">
+    <div class="lm1">9</div>
+    <div class="lm2">Interactive tools you run live</div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S2 HOW TO USE ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">START HERE</span><span class="dot"></span><span>No coding required</span></div>
+  <h2 class="title">How this deck works</h2>
+  <div class="subtitle">Nine slides are <b>live calculators and simulators</b>. You don't read code — you point, click, and drag, and the numbers and pictures react instantly.</div>
+  <div class="cols">
+    <div class="col">
+      <div class="card" style="height:100%;">
+        <h3>Moving around</h3>
+        <ul class="clean">
+          <li>Press <b>→</b> or <b>Space</b> to go forward, <b>←</b> to go back.</li>
+          <li>Use the round <b>‹ ›</b> buttons in the bottom-right corner.</li>
+          <li>The bar along the very bottom shows how far you've gone.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card" style="height:100%;background:var(--cer-paler);border-color:var(--cer-pale);">
+        <h3 style="color:var(--cerulean);">Using the live tools</h3>
+        <ul class="clean">
+          <li>Look for the green <span class="labtag" style="margin:0;font-size:11px;padding:3px 9px;">LIVE TOOL</span> badge.</li>
+          <li><b>Drag the blue sliders</b> or <b>tap the blue buttons</b> to change the inputs.</li>
+          <li>Watch the <b>charts and results update</b> in real time — every figure is computed live, right here in the slide.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:6px;">Each tool turns one idea from Chapter 14 into something you can <b>play with</b>: change a number, see what happens, build intuition.</div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S3 LEARNING OBJECTIVES ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">CH. 14</span><span class="dot"></span><span>Learning objectives</span></div>
+  <h2 class="title">What you'll be able to do</h2>
+  <div class="cols" style="gap:34px;">
+    <div class="col">
+      <ul class="clean">
+        <li>Design a strategy to <b>source equity capital globally</b>.</li>
+        <li>See how an MNE's <b>optimal financial structure</b> differs from a purely domestic firm's.</li>
+        <li>Identify the <b>instruments</b> used to raise equity in global markets.</li>
+        <li>Understand the role of <b>depositary receipts</b> in raising equity.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="clean">
+        <li>Analyze the unique role of <b>private placement</b> in global capital.</li>
+        <li>Explore the structures used to <b>source debt globally</b>.</li>
+        <li>Detail the methods for <b>structuring and funding foreign subsidiaries</b>.</li>
+        <li>Apply it all to a real crisis: <b>CEMEX's debt dilemma</b>.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout gold">The goal that ties the chapter together: a firm — especially one from a segmented or emerging market — wants to <b>lower its cost of capital and widen its access to capital</b> by reaching global investors.</div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S4 ROADMAP ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">CH. 14</span><span class="dot"></span><span>The road ahead</span></div>
+  <h2 class="title sm">Seven sections, one case, nine live tools</h2>
+  <div class="road">
+    <div class="rstep"><span class="rn">14.1</span><div><div class="rt">Designing a strategy to source capital globally</div><div class="rd">Picking a path from domestic markets to global cost &amp; availability of capital.</div></div></div>
+    <div class="rstep"><span class="rn">14.2</span><div><div class="rt">Optimal financial structure</div><div class="rd">The debt/equity mix that minimizes cost of capital — plus four MNE twists. <span class="chip">2 tools</span></div></div></div>
+    <div class="rstep"><span class="rn">14.3</span><div><div class="rt">Raising equity globally</div><div class="rd">IPOs, euroequity, directed issues, depositary receipts, private placement. <span class="chip">1 tool</span></div></div></div>
+    <div class="rstep"><span class="rn">14.4</span><div><div class="rt">Depositary receipts &amp; global registered shares</div><div class="rd">How a foreign company trades on a U.S. exchange. <span class="chip">2 tools</span></div></div></div>
+    <div class="rstep"><span class="rn">14.5</span><div><div class="rt">Private placement</div><div class="rd">Rule 144A, QIBs, and private equity funds.</div></div></div>
+    <div class="rstep"><span class="rn">14.6</span><div><div class="rt">Raising debt globally</div><div class="rd">Bank loans, euronotes, eurobonds, and Islamic finance. <span class="chip">1 tool</span></div></div></div>
+    <div class="rstep"><span class="rn">14.7</span><div><div class="rt">Financing foreign subsidiaries</div><div class="rd">Internal vs. external funds across the subsidiary life cycle. <span class="chip">1 tool</span></div></div></div>
+    <div class="rstep case"><span class="rn">★</span><div><div class="rt">Mini-case — CEMEX's Debt Dilemma</div><div class="rd">An aggressive debt-funded acquisition meets the 2008 crisis. <span class="chip">2 tools</span></div></div></div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S5 DIVIDER 14.1 ============ -->
+<section class="slide divider">
+  <div class="snum">14.1</div>
+  <div class="deye">Section One</div>
+  <div class="dtitle">Designing a strategy to source capital globally</div>
+  <div class="dsub">Management agrees on a long-run financial objective, then chooses among alternative paths to get there.</div>
+  <div class="drule"></div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S6 ALTERNATIVE PATHS ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.1</span><span class="dot"></span><span>Alternative paths · Exhibit 14.1</span></div>
+  <h2 class="title sm">From the home market to global capital — one step at a time</h2>
+  <div class="cols">
+    <div class="col wide">
+      <div class="card flush" style="height:100%;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;">
+        <svg viewBox="0 0 620 360" style="width:100%;height:auto;">
+          <defs>
+            <marker id="rt-arrow" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0492C2"/></marker>
+          </defs>
+          <line x1="40" y1="320" x2="600" y2="320" stroke="#D4E6EC" stroke-width="2"/>
+          <line x1="40" y1="320" x2="40" y2="20" stroke="#D4E6EC" stroke-width="2"/>
+          <text x="44" y="14" font-family="var(--mono)" font-size="11" fill="#7E929B">cost &amp; availability →</text>
+          <!-- staircase path -->
+          <path d="M60,300 L150,300 L150,250 L260,250 L260,200 L360,200 L360,150 L460,150 L460,95 L560,95 L560,55"
+                fill="none" stroke="#0492C2" stroke-width="3.5" stroke-dasharray="2 7" stroke-linecap="round" marker-end="url(#rt-arrow)"/>
+          <!-- nodes -->
+          <circle cx="105" cy="300" r="7" fill="#036E92"/><text x="105" y="318" font-family="var(--sans)" font-size="11" fill="#0B2730" text-anchor="middle" font-weight="700">Domestic</text>
+          <circle cx="200" cy="250" r="7" fill="#036E92"/><text x="200" y="240" font-family="var(--sans)" font-size="11" fill="#0B2730" text-anchor="middle">Intl. bond (home-ish)</text>
+          <circle cx="310" cy="200" r="7" fill="#0492C2"/><text x="310" y="190" font-family="var(--sans)" font-size="11" fill="#0B2730" text-anchor="middle">Intl. bond (target/euro)</text>
+          <circle cx="410" cy="150" r="7" fill="#0492C2"/><text x="410" y="140" font-family="var(--sans)" font-size="11" fill="#0B2730" text-anchor="middle">Equity listing</text>
+          <circle cx="510" cy="95" r="7" fill="#0492C2"/><text x="505" y="85" font-family="var(--sans)" font-size="11" fill="#0B2730" text-anchor="middle">Equity issue</text>
+          <circle cx="560" cy="55" r="8" fill="#E2912A"/><text x="560" y="44" font-family="var(--sans)" font-size="11.5" fill="#BE7818" text-anchor="middle" font-weight="700">Euroequity</text>
+          <text x="330" y="345" font-family="var(--sans)" font-size="11.5" fill="#7E929B" text-anchor="middle" font-style="italic">Debt first → then equity (listings, then issuance)</text>
+        </svg>
+      </div>
+    </div>
+    <div class="col narrow">
+      <ul class="clean tight">
+        <li>Most firms raise their first capital at <b>home</b> (bottom-left).</li>
+        <li>The tempting move is to <b>skip straight to a global equity issue</b> — but unknown firms can't attract foreign investors yet.</li>
+        <li>A good <b>investment bank advisor</b> offers a reality check: cross-list, build a track record, then issue.</li>
+        <li><b>Novo's lesson:</b> start with a eurobond, then gradually penetrate global markets — a <b>market-penetration strategy</b>.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S7 INVESTMENT BANK ROLE ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.1</span><span class="dot"></span><span>The advisor &amp; the reality check</span></div>
+  <h2 class="title sm">Why the investment bank goes first</h2>
+  <div class="cols">
+    <div class="col">
+      <div class="card" style="height:100%;">
+        <h3>What the bank does for you</h3>
+        <ul class="clean">
+          <li>Stays in touch with <b>potential foreign investors</b> and their current requirements.</li>
+          <li>Helps navigate <b>institutional barriers</b> and decides <b>if, when, and where</b> to cross-list.</li>
+          <li>Prepares the <b>prospectus</b>, helps <b>price the issue</b>, and maintains an aftermarket to support the price.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="tint" style="height:100%;">
+        <span class="tag gold">The reality check</span>
+        <p style="margin-top:14px;font-size:18px;line-height:1.5;">A firm known only at home is usually <b>not visible enough</b> to attract global investors. Jumping straight to a global equity issue tends to fail.</p>
+        <div class="callout" style="margin-top:14px;">The proven sequence is <b>gradual penetration</b>: a credible eurobond first, then listings, then equity — earning name recognition at each step.<span class="who">— the lesson from Novo (Chapter 13)</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S8 DIVIDER 14.2 ============ -->
+<section class="slide divider">
+  <div class="snum">14.2</div>
+  <div class="deye">Section Two</div>
+  <div class="dtitle">Optimal financial structure</div>
+  <div class="dsub">The particular mix of debt and equity that minimizes the firm's cost of capital — for a given level of business risk.</div>
+  <div class="drule"></div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S9 MM COMPROMISE ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.2</span><span class="dot"></span><span>The settled debate</span></div>
+  <h2 class="title sm">Traditionalists meet Modigliani &amp; Miller — in compromise</h2>
+  <div class="callout" style="font-size:19px;">When <b>taxes and bankruptcy costs</b> are considered, a firm has an <b>optimal financial structure</b> — the mix of debt and equity that <b>minimizes the cost of capital</b> for a given level of business risk.</div>
+  <div class="cols" style="margin-top:20px;">
+    <div class="col">
+      <div class="card" style="height:100%;">
+        <h3>Why debt lowers cost — at first</h3>
+        <ul class="clean">
+          <li>Debt is <b>cheaper</b> than equity, and interest is <b>tax-deductible</b>: its after-tax cost is <span class="chip">k<sub>d</sub>(1 − t)</span>.</li>
+          <li>Adding low-cost debt pulls the <b>weighted average</b> (WACC) down.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card" style="height:100%;">
+        <h3>Why it eventually reverses</h3>
+        <ul class="clean">
+          <li>More debt raises <b>perceived financial risk</b>, so the cost of equity <span class="chip">k<sub>e</sub></span> climbs.</li>
+          <li>Past a point, fear of <b>insolvency</b> spikes the cost of <b>both</b> debt and equity — WACC turns back up.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:14px;">If a new project's business risk differs from existing projects, the optimal debt/equity mix shifts to balance business vs. financial risk.</div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S10 COST OF CAPITAL CURVE INTRO ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.2</span><span class="dot"></span><span>The U-shaped curve · Exhibit 14.2</span></div>
+  <h2 class="title sm">The cost of capital is U-shaped in leverage</h2>
+  <div class="cols">
+    <div class="col">
+      <ul class="clean">
+        <li>The <b>debt ratio</b> = total debt ÷ total assets, at market values.</li>
+        <li>As it rises, WACC <b>falls</b> (cheap, tax-favored debt), then <b>rises</b> (insolvency risk) — a U-shape.</li>
+        <li>The bottom is a <b>broad, flat range</b> — roughly <b>30%–50%</b> debt — where cost barely changes.</li>
+        <li>Where a firm sits within that range depends on its <b>industry</b>, its <b>sales/income volatility</b>, and the <b>collateral value</b> of its assets.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="tint" style="height:100%;display:flex;flex-direction:column;justify-content:center;">
+        <div class="formula">k<span class="hi">WACC</span> = <span class="hi">k<sub>e</sub></span>·(E/V) + <span class="hi">k<sub>d</sub></span>(1 − t)·(D/V)</div>
+        <div class="callout gold" style="margin-top:16px;">Turn the page → and <b>build this curve yourself</b>. Drag the debt ratio and tax-rate sliders and watch the minimum move.</div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S11 TOOL 1: WACC EXPLORER ============ -->
+<section class="slide">
+  <div class="labtag">LIVE TOOL · 1 of 9</div>
+  <h2 class="title sm" style="margin-bottom:2px;">Cost-of-Capital Curve Explorer</h2>
+  <div class="hint" style="margin-bottom:14px;"><b>Drag</b> the <b>Debt ratio</b> slider to move along the curve. Drag <b>Tax rate</b> to see how the interest tax shield deepens the dip. Find the lowest point of the orange WACC curve.</div>
+  <div class="lab">
+    <div class="lab-grid">
+      <div class="lab-controls">
+        <div class="ctrl">
+          <div class="top"><span class="cl">Debt ratio &nbsp;(D / V)</span><span class="cv" id="wacc-d-v">40%</span></div>
+          <input type="range" id="wacc-d" min="0" max="95" value="40" step="1">
+        </div>
+        <div class="ctrl">
+          <div class="top"><span class="cl">Corporate tax rate</span><span class="cv" id="wacc-t-v">34%</span></div>
+          <input type="range" id="wacc-t" min="0" max="45" value="34" step="1">
+        </div>
+        <div class="readout">
+          <div class="rr"><span class="rk">Cost of equity &nbsp;k<sub>e</sub></span><span class="rv" id="wacc-ke">—</span></div>
+          <div class="rr"><span class="rk">After-tax cost of debt</span><span class="rv" id="wacc-kd">—</span></div>
+          <div class="rr"><span class="rk">Weighted average (WACC)</span><span class="rv big" id="wacc-w">—</span></div>
+        </div>
+        <div class="verdict ok" id="wacc-verdict"><span class="vi">✓</span><span id="wacc-vtext">In the minimum-cost range</span></div>
+      </div>
+      <div class="lab-viz">
+        <div class="vizhead"><span class="vt">Cost of capital vs. leverage</span><span class="vs">shaded band = 30–50% flat minimum</span></div>
+        <div id="wacc-chart" class="viz-svg"></div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S12 FOUR MNE VARIABLES ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.2</span><span class="dot"></span><span>Optimal structure &amp; the multinational</span></div>
+  <h2 class="title sm">Four variables that bend the domestic theory for an MNE</h2>
+  <div class="row" style="gap:16px;flex:1;">
+    <div class="card grow"><h3 style="color:var(--cerulean);">1 · Availability of capital</h3><p style="font-size:16px;line-height:1.45;color:var(--ink);">Global market access lets an MNE keep its <b>marginal cost of capital constant</b> over a wide budget range — small domestic firms can't.</p></div>
+    <div class="card grow"><h3 style="color:var(--cerulean);">2 · Diversification of cash flows</h3><p style="font-size:16px;line-height:1.45;color:var(--ink);">Internationally diversified cash flows are <b>less variable</b>, which can, in theory, support <b>higher debt ratios</b>.</p></div>
+  </div>
+  <div class="row" style="gap:16px;flex:1;margin-top:16px;">
+    <div class="card grow"><h3 style="color:var(--cerulean);">3 · Foreign exchange risk</h3><p style="font-size:16px;line-height:1.45;color:var(--ink);">Foreign-currency debt adds <b>FX gains/losses</b> to its true cost — sometimes a lot. <span class="chip">tool next →</span></p></div>
+    <div class="card grow"><h3 style="color:var(--cerulean);">4 · Investor expectations</h3><p style="font-size:16px;line-height:1.45;color:var(--ink);">Global investors apply <b>U.S./UK-style norms</b>. Debt ratios up to <b>~60%</b> are accepted; higher is a hard sell.</p></div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S13 AVAILABILITY + DIVERSIFICATION ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.2</span><span class="dot"></span><span>Availability &amp; diversification</span></div>
+  <h2 class="title sm">A constant marginal cost — and a diversification caveat</h2>
+  <div class="cols">
+    <div class="col">
+      <div class="card" style="height:100%;">
+        <h3>The availability advantage</h3>
+        <ul class="clean tight">
+          <li>With global access, large new fundraises <b>don't push up</b> the MNE's marginal cost of capital.</li>
+          <li>MNEs in <b>illiquid home markets</b> that haven't globalized look like small domestic firms — leaning on internal funds and bank loans, and sometimes <b>over-borrowing</b>.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="tint" style="height:100%;">
+        <span class="tag">The diversification debate</span>
+        <p style="margin-top:12px;font-size:16.5px;line-height:1.45;">Because country returns aren't perfectly correlated, an MNE's diversified cash flows should be <b>steadier</b> — supporting more debt.</p>
+        <div class="callout" style="margin-top:12px;font-size:15.5px;"><b>But the evidence pushes back:</b> U.S. MNEs actually carry <b>lower</b> debt ratios than domestic peers — facing higher agency costs of debt, political risk, FX risk, and asymmetric information.</div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S14 FX RISK MATH ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.2</span><span class="dot"></span><span>FX risk &amp; the cost of debt</span></div>
+  <h2 class="title sm">The 5% loan that really cost 9.375%</h2>
+  <div class="cols">
+    <div class="col">
+      <p class="lede" style="font-size:18px;">A U.S. firm borrows <b>CHF 1,500,000</b> for one year at <b>5%</b>. Over the year the franc <b>appreciates</b> from CHF1.5000 to CHF1.4400 per dollar. The true dollar cost combines the interest rate <i>and</i> the currency move:</p>
+      <div class="formula" style="margin-top:14px;">k<span class="hi">d</span><sup>$</sup> = [(1 + k<span class="hi">d</span><sup>CHF</sup>)(1 + s)] − 1<br>= [(1.0500)(1.041667)] − 1 = <span class="gold">9.375%</span></div>
+    </div>
+    <div class="col narrow">
+      <div class="kv card" style="height:100%;">
+        <div class="r"><span class="k">Dollars received</span><span class="v">$1,000,000</span></div>
+        <div class="r"><span class="k">Repay (CHF 1,575,000 ÷ 1.44)</span><span class="v">$1,093,750</span></div>
+        <div class="r"><span class="k">Currency change &nbsp;s</span><span class="v">+4.167%</span></div>
+        <div class="r"><span class="k">Effective cost</span><span class="v" style="color:var(--gold-dark);">9.375%</span></div>
+        <div class="r"><span class="k">After-tax (t = 34%)</span><span class="v" style="color:var(--good-d);">6.1875%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="callout gold" style="margin-top:14px;">The extra <b>4.167%</b> is recorded as an FX transaction <b>loss</b> — and it's tax-deductible. A depreciating foreign currency would have made the debt <b>cheaper</b> than 5%.</div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S15 TOOL 2: FX DEBT COST ============ -->
+<section class="slide">
+  <div class="labtag">LIVE TOOL · 2 of 9</div>
+  <h2 class="title sm" style="margin-bottom:2px;">Foreign-Currency Debt Cost Calculator</h2>
+  <div class="hint" style="margin-bottom:12px;">A U.S. firm borrows <b>CHF 1,500,000</b> for one year. <b>Drag</b> the sliders — or tap a <b>year-end rate</b> preset — and watch how the currency move turns a quoted rate into a very different true cost.</div>
+  <div class="lab">
+    <div class="lab-grid">
+      <div class="lab-controls">
+        <div class="ctrl">
+          <div class="top"><span class="cl">Foreign interest rate &nbsp;k<sub>d</sub><sup>CHF</sup></span><span class="cv" id="fx-i-v">5.00%</span></div>
+          <input type="range" id="fx-i" min="0" max="12" value="5" step="0.25">
+        </div>
+        <div class="ctrl">
+          <div class="top"><span class="cl">Year-end rate &nbsp;(CHF per $1)</span><span class="cv" id="fx-e-v">1.4400</span></div>
+          <input type="range" id="fx-e" min="1.30" max="1.70" value="1.44" step="0.0010">
+          <div class="seg" style="margin-top:10px;" id="fx-presets">
+            <button data-e="1.5000">1.5000</button>
+            <button data-e="1.4400" class="on">1.4400</button>
+            <button data-e="1.3860">1.3860</button>
+            <button data-e="1.6240">1.6240</button>
+          </div>
+        </div>
+        <div class="ctrl">
+          <div class="top"><span class="cl">Tax rate</span><span class="cv" id="fx-t-v">34%</span></div>
+          <input type="range" id="fx-t" min="0" max="45" value="34" step="1">
+        </div>
+        <div class="verdict warn" id="fx-verdict"><span class="vi">↑</span><span id="fx-vtext">Franc appreciated — debt got more expensive</span></div>
+      </div>
+      <div class="lab-viz">
+        <div class="vizhead"><span class="vt">True dollar cost of the loan</span><span class="vs">start rate fixed at CHF 1.5000 = $1</span></div>
+        <div id="fx-chart" class="viz-svg" style="flex:0 0 auto;"></div>
+        <div class="readout" style="margin-top:12px;">
+          <div class="rr"><span class="rk">Interest rate (as quoted)</span><span class="rv" id="fx-nom">5.00%</span></div>
+          <div class="rr"><span class="rk">Currency effect</span><span class="rv" id="fx-cur">+4.17%</span></div>
+          <div class="rr"><span class="rk">True cost in dollars</span><span class="rv big" id="fx-eff">9.375%</span></div>
+          <div class="rr"><span class="rk">After-tax cost</span><span class="rv" id="fx-aft">6.188%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S16 PORTFOLIO INVESTOR EXPECTATIONS ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.2</span><span class="dot"></span><span>Expectations of global investors</span></div>
+  <h2 class="title sm">Global norms override national ones</h2>
+  <div class="cols center">
+    <div class="col">
+      <ul class="clean">
+        <li>The key to a global cost of capital is <b>attracting and keeping international portfolio investors</b>.</li>
+        <li>Their expectations follow <b>global norms</b> built over decades — dominated by the deep, liquid <b>U.S. and U.K.</b> markets.</li>
+        <li>To raise capital globally, a firm must <b>adopt those norms</b>, whatever its home-country habits.</li>
+      </ul>
+    </div>
+    <div class="col narrow">
+      <div class="card" style="text-align:center;height:100%;display:flex;flex-direction:column;justify-content:center;">
+        <div class="stat" style="box-shadow:none;border:none;padding:0;">
+          <div class="n" style="font-size:64px;">≤ 60%</div>
+          <div class="l" style="font-size:15px;margin-top:14px;">debt ratio that international investors find <b>acceptable</b>.<br>Higher ratios get much harder to sell.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S17 DIVIDER 14.3 ============ -->
+<section class="slide divider">
+  <div class="snum">14.3</div>
+  <div class="deye">Section Three</div>
+  <div class="dtitle">Raising equity globally</div>
+  <div class="dsub">Once the strategy and target capital structure are set, the firm raises capital abroad — with a toolbox of public and private paths.</div>
+  <div class="drule"></div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S18 ISSUANCE VS LISTING ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.3</span><span class="dot"></span><span>The core distinction · Exhibit 14.3</span></div>
+  <h2 class="title sm">Issuance raises cash. Listing builds visibility.</h2>
+  <div class="cols">
+    <div class="col">
+      <div class="card" style="height:100%;">
+        <h3 style="color:var(--cerulean);">Equity issuance →&nbsp;cash</h3>
+        <ul class="clean tight">
+          <li><b>IPO</b> — first sale of a private company's shares to the public.</li>
+          <li><b>SPO / follow-on (FO)</b> — selling additional shares later.</li>
+          <li><b>Euroequity</b> — selling in two or more countries at once.</li>
+          <li><b>Directed issue</b> — sale aimed at one specific market or investor.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card" style="height:100%;">
+        <h3 style="color:var(--cerulean);">Equity listing →&nbsp;visibility</h3>
+        <ul class="clean tight">
+          <li>Shares are <b>traded on an exchange</b> in a specific country market.</li>
+          <li><b>Cross-listing</b> puts shares on an exchange abroad to widen the investor universe.</li>
+          <li><b>Depositary receipts (DR)</b> — a bank certificate standing in for foreign shares.</li>
+          <li>A listing often <b>precedes</b> an issuance, preparing the market.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:6px;">An issuance needn't be public: a firm can sell to private investors via a <b>private placement</b> — but the holder gives up an open, liquid market for the shares.</div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S19 FOUR EQUITY ALTERNATIVES ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.3</span><span class="dot"></span><span>The menu · Exhibit 14.4</span></div>
+  <h2 class="title sm">Four ways to raise equity outside the home market</h2>
+  <div class="row" style="gap:16px;flex:1;">
+    <div class="card grow"><span class="tag">Public</span><h3 style="margin-top:10px;">Initial Public Offering</h3><ul class="clean tight"><li>Private shares sold to the public for the first time</li><li>Seasoned offerings come later</li><li>Depositary receipts for foreign issuers</li></ul></div>
+    <div class="card grow"><span class="tag">Public</span><h3 style="margin-top:10px;">Euroequity Issue</h3><ul class="clean tight"><li>An IPO on two or more exchanges, in two or more countries, at once</li><li>Generic term for global securities issues</li></ul></div>
+  </div>
+  <div class="row" style="gap:16px;flex:1;margin-top:16px;">
+    <div class="card grow"><span class="tag gold">Targeted</span><h3 style="margin-top:10px;">Directed Public / Private Issue</h3><ul class="clean tight"><li>Shares sold to a specific market or exchange</li><li>Or to a specific set of private interests</li></ul></div>
+    <div class="card grow"><span class="tag gold">Private</span><h3 style="margin-top:10px;">Private Placement</h3><ul class="clean tight"><li>Private placement of public shares or private interest</li><li>Private equity</li><li>Strategic partner / alliance</li></ul></div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S20 IPO MECHANICS ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.3</span><span class="dot"></span><span>Inside the IPO</span></div>
+  <h2 class="title sm">Going public: the price of the spotlight</h2>
+  <div class="cols">
+    <div class="col">
+      <ul class="clean">
+        <li>An <b>underwriting syndicate</b> of investment banks prepares filings and a <b>prospectus</b>.</li>
+        <li>The initial sale is usually <b>15%–25%</b> of the firm (recently as little as <b>6%–8%</b>).</li>
+        <li>The shares traded publicly are the <b>public float</b> (or <b>free float</b>).</li>
+        <li>Going public means <b>continuous disclosure</b> — costly, and it hands information to competitors, customers, and suppliers.</li>
+      </ul>
+    </div>
+    <div class="col narrow">
+      <div class="tint" style="height:100%;display:flex;flex-direction:column;justify-content:center;">
+        <div class="stat" style="box-shadow:none;border:none;padding:0;text-align:center;">
+          <div class="n" style="font-size:46px;">15–25%</div>
+          <div class="l" style="margin-top:10px;">typical share of ownership sold in an IPO</div>
+        </div>
+        <div class="callout" style="margin-top:18px;font-size:15px;">Shares only raise capital <b>at issuance</b>. Daily price swings change owners' returns — not the company's capital.</div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S21 ARAMCO VALUATION SETUP ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.3</span><span class="dot"></span><span>Global Finance in Practice 14.1</span></div>
+  <h2 class="title sm">Saudi Aramco: what's the world's most profitable company worth?</h2>
+  <div class="cols">
+    <div class="col">
+      <ul class="clean tight">
+        <li>2018 earnings of <b>$111 billion</b> made Aramco the most profitable company on Earth.</li>
+        <li>Crown Prince <b>MbS wanted a valuation above $2 trillion</b>, planning to raise $100B by selling 5%.</li>
+        <li>Two methods gave very different answers — <b>price-to-earnings</b> vs. <b>dividend yield</b>.</li>
+        <li>Consensus landed at <b>$1.7T</b>. Saudi Arabia sold just <b>1.5%</b>, raising ~<b>$26B</b> at a $1.7T valuation.</li>
+      </ul>
+    </div>
+    <div class="col narrow">
+      <div class="kv card" style="height:100%;">
+        <div class="r"><span class="k">P/E × earnings (18.8 × $111B)</span><span class="v">≈ $2.1T</span></div>
+        <div class="r"><span class="k">Forward P/E (13.8 × $111B)</span><span class="v">≈ $1.5T</span></div>
+        <div class="r"><span class="k">Dividend ÷ yield ($75B ÷ 5%)</span><span class="v">$1.5T</span></div>
+        <div class="r"><span class="k">MbS target</span><span class="v" style="color:var(--gold-dark);">$2.0T</span></div>
+        <div class="r"><span class="k">Final IPO valuation</span><span class="v" style="color:var(--cerulean);">$1.7T</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S22 TOOL 3: ARAMCO VALUATION ============ -->
+<section class="slide">
+  <div class="labtag">LIVE TOOL · 3 of 9</div>
+  <h2 class="title sm" style="margin-bottom:2px;">Saudi Aramco Valuation Lab</h2>
+  <div class="hint" style="margin-bottom:12px;"><b>Pick a method</b>, then drag the sliders. Can you reach MbS's <b>$2.0 trillion</b> target? Notice what the dividend has to be to justify a 5% yield on a $2T company.</div>
+  <div class="lab">
+    <div class="lab-grid">
+      <div class="lab-controls">
+        <div class="seg" id="ar-method">
+          <button data-m="pe" class="on">Price-to-Earnings</button>
+          <button data-m="dy">Dividend Yield</button>
+        </div>
+        <div id="ar-pe-ctrls">
+          <div class="ctrl">
+            <div class="top"><span class="cl">Annual earnings</span><span class="cv" id="ar-e-v">$111B</span></div>
+            <input type="range" id="ar-e" min="80" max="140" value="111" step="1">
+          </div>
+          <div class="ctrl">
+            <div class="top"><span class="cl">P/E multiple</span><span class="cv" id="ar-pe-v">18.8×</span></div>
+            <input type="range" id="ar-pe" min="8" max="22" value="18.8" step="0.1">
+          </div>
+        </div>
+        <div id="ar-dy-ctrls" style="display:none;">
+          <div class="ctrl">
+            <div class="top"><span class="cl">Promised dividend</span><span class="cv" id="ar-d-v">$75B</span></div>
+            <input type="range" id="ar-d" min="50" max="110" value="75" step="1">
+          </div>
+          <div class="ctrl">
+            <div class="top"><span class="cl">Required dividend yield</span><span class="cv" id="ar-y-v">5.0%</span></div>
+            <input type="range" id="ar-y" min="3.5" max="7" value="5" step="0.1">
+          </div>
+        </div>
+        <div class="verdict warn" id="ar-verdict"><span class="vi">●</span><span id="ar-vtext">—</span></div>
+      </div>
+      <div class="lab-viz">
+        <div class="vizhead"><span class="vt">Implied valuation</span><span class="vs">dashed lines = $1.7T consensus &amp; $2.0T target</span></div>
+        <div id="ar-chart" class="viz-svg"></div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S23 EUROEQUITY ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.3</span><span class="dot"></span><span>Euroequity &amp; privatizations</span></div>
+  <h2 class="title sm">Euroequity: one IPO, many countries, at once</h2>
+  <div class="cols">
+    <div class="col">
+      <ul class="clean tight">
+        <li>An <b>IPO on multiple exchanges in multiple countries simultaneously</b>, underwritten by an international syndicate.</li>
+        <li>"Euro" is just a label — <b>not</b> European issuers, <b>not</b> euro-denominated.</li>
+        <li>Shares are sold in <b>tranches</b> — allocations to underwriters for their geographic markets — to raise funds <i>and</i> ensure worldwide liquidity.</li>
+        <li>The biggest were <b>privatizations of state-owned enterprises</b>, often profitable quasi-monopolies with strong credit.</li>
+      </ul>
+    </div>
+    <div class="col narrow">
+      <div class="card" style="height:100%;">
+        <h3>Landmark issues</h3>
+        <div class="kv">
+          <div class="r"><span class="k">British Telecom (1984)</span><span class="v">the model</span></div>
+          <div class="r"><span class="k">Deutsche Telekom (1996)</span><span class="v">$13B</span></div>
+          <div class="r"><span class="k">Teléfonos de México (1991)</span><span class="v">$2B</span></div>
+          <div class="r"><span class="k">YPF, Argentina (1993)</span><span class="v">$3B</span></div>
+        </div>
+        <div class="note" style="margin-top:10px;">~75% of YPF's shares were placed outside Argentina (46% in the U.S. alone).</div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S24 DIRECTED ISSUE ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.3</span><span class="dot"></span><span>Directed public / private issue</span></div>
+  <h2 class="title sm">Aiming an issue at one country</h2>
+  <div class="cols">
+    <div class="col">
+      <ul class="clean">
+        <li>A <b>directed issue</b> targets investors in a <b>single country</b>, underwritten there, usually paired with a <b>cross-listing</b> on that market's exchange.</li>
+        <li>Often motivated by the need to <b>fund acquisitions or capital investment</b> in a target foreign market.</li>
+        <li>Especially valuable for firms that have <b>outgrown a small home capital market</b>.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="tint" style="height:100%;">
+        <span class="tag gold">Case · Nycomed (Norway)</span>
+        <p style="margin-top:12px;font-size:16.5px;line-height:1.45;">A small Norwegian pharma firm grew by <b>acquiring</b> technology-rich firms in Europe and the U.S., paying partly in shares. It funded the strategy with two directed issues:</p>
+        <div class="kv" style="margin-top:6px;">
+          <div class="r"><span class="k">London (LSE) cross-list, 1989</span><span class="v">$100M</span></div>
+          <div class="r"><span class="k">New York (NYSE) cross-list</span><span class="v">$75M</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S25 DIVIDER 14.4 ============ -->
+<section class="slide divider">
+  <div class="snum">14.4</div>
+  <div class="deye">Section Four</div>
+  <div class="dtitle">Depositary receipts</div>
+  <div class="dsub">A bank certificate that lets a foreign company's shares trade on a U.S. or global exchange — a synthetic share abroad.</div>
+  <div class="drule"></div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S26 DR/ADR/GDR BASICS ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.4</span><span class="dot"></span><span>The vocabulary &amp; the origin</span></div>
+  <h2 class="title sm">ADRs, GDRs, and a clever 1927 workaround</h2>
+  <div class="cols">
+    <div class="col">
+      <ul class="clean tight">
+        <li>A <b>depositary receipt (DR)</b> is a negotiable certificate from a bank representing foreign shares held in trust.</li>
+        <li><b>ADR</b> = traded in the U.S., in U.S. dollars. <b>GDR</b> = traded outside the U.S.</li>
+        <li>Each DR can equal a <b>multiple or fraction</b> of a home share, so the U.S. price lands in a sensible range.</li>
+        <li>Dividends flow foreign-firm → custodian → issuing bank, which converts to dollars for holders.</li>
+      </ul>
+    </div>
+    <div class="col narrow">
+      <div class="tint" style="height:100%;">
+        <span class="tag">Born to beat a rule</span>
+        <p style="margin-top:12px;font-size:16px;line-height:1.45;">The first ADR (1927, by <b>J.P. Morgan</b>) was for British retailer <b>Selfridges</b>. Britain barred its firms from registering shares abroad without a British transfer agent.</p>
+        <div class="callout" style="margin-top:12px;font-size:15px;">DRs sidestep this by creating a <b>synthetic share abroad</b> — no actual registration of shares outside the home country.</div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S27 ADR MECHANICS STEPS ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.4</span><span class="dot"></span><span>How issuance works · Exhibit 14.5</span></div>
+  <h2 class="title sm">Buying a Brazilian company through an ADR — in 7 steps</h2>
+  <div class="cols">
+    <div class="col">
+      <ol style="margin:0;padding-left:22px;font-size:15.5px;line-height:1.5;color:var(--ink);">
+        <li>U.S. investor instructs a broker to <b>buy</b> the Brazilian shares.</li>
+        <li>U.S. broker places the order with a <b>local broker in Brazil</b>.</li>
+        <li>Brazilian broker buys the shares, delivers them to a <b>custodian bank</b>.</li>
+        <li>U.S. broker <b>converts dollars to reais</b> to pay for the shares.</li>
+        <li>Custodian <b>notifies</b> the U.S. depositary bank of the deposit.</li>
+        <li>Depositary bank <b>issues and delivers the ADRs</b> to the U.S. broker.</li>
+        <li>U.S. broker delivers the <b>ADRs to the investor</b>.</li>
+      </ol>
+    </div>
+    <div class="col narrow">
+      <div class="card" style="height:100%;">
+        <h3>Once they exist</h3>
+        <ul class="clean tight">
+          <li><b>Intra-market trading</b> (ADR to ADR) is ~<b>95%</b> of all DR trading.</li>
+          <li>Settles in dollars on T+3 via the <b>DTC</b>.</li>
+          <li><b>Arbitrage</b> keeps home and U.S. prices in line.</li>
+        </ul>
+        <div class="callout gold" style="margin-top:10px;font-size:14px;">Animate all 7 steps on the next slide.</div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S28 TOOL 4: ADR FLOW ANIMATOR ============ -->
+<section class="slide">
+  <div class="labtag">LIVE TOOL · 4 of 9</div>
+  <h2 class="title sm" style="margin-bottom:2px;">ADR Mechanics Flow Animator</h2>
+  <div class="hint" style="margin-bottom:12px;"><b>Tap “Next step”</b> to walk through the process one move at a time. The active path lights up in blue. Switch between <b>creating</b> and <b>cancelling</b> ADRs.</div>
+  <div class="lab">
+    <div class="lab-grid">
+      <div class="lab-controls" style="flex:.8;">
+        <div class="seg" id="adr-mode">
+          <button data-m="issue" class="on">Standard Issuance</button>
+          <button data-m="cancel">Cancellation</button>
+        </div>
+        <div class="card" style="flex:1;display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;">
+            <span class="tag" id="adr-step-no">Step 1 / 7</span>
+          </div>
+          <h3 id="adr-step-title" style="margin:12px 0 8px;color:var(--cerulean);font-size:17px;text-transform:none;letter-spacing:0;">Investor places the order</h3>
+          <p id="adr-step-desc" style="font-size:15.5px;line-height:1.5;color:var(--ink);flex:1;">The U.S. investor instructs a broker to make a purchase of shares in the publicly traded Brazilian company.</p>
+        </div>
+        <div class="row">
+          <button class="btn ghost" id="adr-prev" style="flex:1;">‹ Back</button>
+          <button class="btn" id="adr-next" style="flex:1.4;">Next step ›</button>
+        </div>
+      </div>
+      <div class="lab-viz">
+        <div class="vizhead"><span class="vt" id="adr-mkt-title">Standard issuance</span><span class="vs">US market (top) · Brazilian market (bottom)</span></div>
+        <svg id="adr-svg" viewBox="0 0 620 350" class="viz-svg">
+          <defs>
+            <marker id="adr-ah" markerWidth="10" markerHeight="10" refX="6.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#0492C2"/></marker>
+            <marker id="adr-ah0" markerWidth="10" markerHeight="10" refX="6.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#D4E6EC"/></marker>
+          </defs>
+          <line x1="20" y1="150" x2="600" y2="150" stroke="#E2912A" stroke-width="1.5" stroke-dasharray="6 5" opacity=".5"/>
+          <text x="26" y="143" font-family="var(--mono)" font-size="10" fill="#BE7818">U.S. MARKET</text>
+          <text x="26" y="168" font-family="var(--mono)" font-size="10" fill="#BE7818">BRAZILIAN MARKET</text>
+
+          <!-- arrows (drawn first, under boxes) -->
+          <line id="arrIU" class="flowarr" x1="180" y1="62" x2="235" y2="62" marker-end="url(#adr-ah0)"/>
+          <line id="arrUL" class="flowarr" x1="310" y1="92" x2="310" y2="206" marker-end="url(#adr-ah0)"/>
+          <line id="arrLC" class="flowarr" x1="385" y1="245" x2="440" y2="245" marker-end="url(#adr-ah0)"/>
+          <line id="arrCD" class="flowarr" x1="515" y1="206" x2="515" y2="92" marker-end="url(#adr-ah0)"/>
+          <line id="arrDU" class="flowarr" x1="440" y1="62" x2="387" y2="62" marker-end="url(#adr-ah0)"/>
+
+          <!-- US row boxes -->
+          <g id="bx-investor"><rect class="flowbox" x="30" y="34" width="150" height="56" rx="9"/><text class="flowlbl" x="105" y="58" text-anchor="middle">U.S. Investor</text><text class="flowsub" x="105" y="76" text-anchor="middle">buys / holds ADRs</text></g>
+          <g id="bx-usbroker"><rect class="flowbox" x="235" y="34" width="150" height="56" rx="9"/><text class="flowlbl" x="310" y="58" text-anchor="middle">U.S. Broker</text><text class="flowsub" x="310" y="76" text-anchor="middle">routes the order</text></g>
+          <g id="bx-depbank"><rect class="flowbox" x="440" y="34" width="150" height="56" rx="9"/><text class="flowlbl" x="515" y="58" text-anchor="middle">U.S. Depositary Bank</text><text class="flowsub" x="515" y="76" text-anchor="middle">issues the ADRs</text></g>
+          <!-- Brazil row boxes -->
+          <g id="bx-localbroker"><rect class="flowbox" x="235" y="206" width="150" height="56" rx="9"/><text class="flowlbl" x="310" y="230" text-anchor="middle">Brazilian Broker</text><text class="flowsub" x="310" y="248" text-anchor="middle">buys ordinary shares</text></g>
+          <g id="bx-custodian"><rect class="flowbox" x="440" y="206" width="150" height="56" rx="9"/><text class="flowlbl" x="515" y="230" text-anchor="middle">Custodian Bank</text><text class="flowsub" x="515" y="248" text-anchor="middle">holds shares in trust</text></g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S29 SPONSORED + LEVELS ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.4</span><span class="dot"></span><span>Program structures · Exhibit 14.6</span></div>
+  <h2 class="title sm">Sponsored or not — and three levels of commitment</h2>
+  <div class="cols">
+    <div class="col narrow">
+      <div class="card" style="height:100%;">
+        <h3>Sponsored vs. unsponsored</h3>
+        <ul class="clean tight">
+          <li><b>Sponsored</b>: the foreign firm requests it and <b>pays the costs</b>.</li>
+          <li><b>Unsponsored</b>: a U.S. securities firm starts it; rare, still needs SEC approval.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col wide">
+      <div class="card" style="height:100%;">
+        <h3>The three ADR levels</h3>
+        <div class="kv">
+          <div class="r"><span class="k"><span class="chip">Level I</span> &nbsp;OTC / pink sheets</span><span class="v" style="font-size:14px;">Easiest · home-country disclosure · ~6 wks · no new capital</span></div>
+          <div class="r"><span class="k"><span class="chip">Level II</span> &nbsp;U.S. exchange listing</span><span class="v" style="font-size:14px;">Full SEC + U.S. GAAP · ~13 wks · no new capital</span></div>
+          <div class="r"><span class="k"><span class="chip">Level III</span> &nbsp;new equity issue</span><span class="v" style="font-size:14px;color:var(--gold-dark);">Full SEC + prospectus · ~14 wks · raises capital</span></div>
+        </div>
+        <div class="note" style="margin-top:12px;">Higher level = more disclosure and cost, but Level III is the only one that lets a foreign firm <b>raise new equity</b> in U.S. markets.</div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S30 GRS ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.4</span><span class="dot"></span><span>Global registered shares</span></div>
+  <h2 class="title sm">GRS vs. ADR: one share everywhere, or a strategically priced receipt</h2>
+  <div class="cols">
+    <div class="col">
+      <ul class="clean tight">
+        <li>A <b>GRS</b> is the identical share traded across exchanges <b>without conversion</b> — one share = one share, just in different currencies.</li>
+        <li>A German share at <b>€4.00</b> with a <b>$1.20</b> rate is <b>$4.80</b> as a GRS — too cheap for the NYSE.</li>
+        <li>As an <b>ADR</b>, bundle <b>4 shares</b> → <b>$19.20</b>, inside the <b>$10–$20</b> "strategic pricing" zone that maximizes U.S. liquidity.</li>
+        <li>GRSs keep <b>all voting rights</b> and ease comparison; ADRs win on <b>target pricing</b> in markets like the U.S.</li>
+      </ul>
+    </div>
+    <div class="col narrow">
+      <div class="tint" style="height:100%;display:flex;flex-direction:column;justify-content:center;">
+        <div class="formula">€4.00 × $1.20 = <span class="hi">$4.80</span> &nbsp;(GRS)<br>$4.80 × 4 = <span class="gold">$19.20</span> &nbsp;(ADR)</div>
+        <div class="callout gold" style="margin-top:14px;font-size:14.5px;">Next: drag the price, rate, and bundle size — and try to land the ADR in the strategic zone.</div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S31 TOOL 5: ADR vs GRS PRICING ============ -->
+<section class="slide">
+  <div class="labtag">LIVE TOOL · 5 of 9</div>
+  <h2 class="title sm" style="margin-bottom:2px;">ADR vs. GRS Pricing Lab</h2>
+  <div class="hint" style="margin-bottom:12px;">A German firm's shares trade on Frankfurt. <b>Drag</b> the home price and exchange rate, then choose how many shares each ADR bundles. Land the green ADR marker in the <b>$10–$20</b> strategic zone.</div>
+  <div class="lab">
+    <div class="lab-grid">
+      <div class="lab-controls">
+        <div class="ctrl">
+          <div class="top"><span class="cl">Home share price</span><span class="cv" id="grs-p-v">€4.00</span></div>
+          <input type="range" id="grs-p" min="1" max="10" value="4" step="0.05">
+        </div>
+        <div class="ctrl">
+          <div class="top"><span class="cl">Exchange rate &nbsp;($ per €)</span><span class="cv" id="grs-r-v">$1.20</span></div>
+          <input type="range" id="grs-r" min="0.80" max="1.60" value="1.20" step="0.01">
+        </div>
+        <div class="ctrl">
+          <div class="top"><span class="cl">Shares bundled per ADR</span><span class="cv" id="grs-n-v">4×</span></div>
+          <input type="range" id="grs-n" min="1" max="8" value="4" step="1">
+        </div>
+        <div class="readout">
+          <div class="rr"><span class="rk">GRS price (1 share = 1 share)</span><span class="rv" id="grs-grs">$4.80</span></div>
+          <div class="rr"><span class="rk">ADR price (bundled)</span><span class="rv big" id="grs-adr">$19.20</span></div>
+        </div>
+        <div class="verdict ok" id="grs-verdict"><span class="vi">✓</span><span id="grs-vtext">ADR is inside the $10–$20 strategic zone</span></div>
+      </div>
+      <div class="lab-viz">
+        <div class="vizhead"><span class="vt">U.S. price ladder</span><span class="vs">shaded band = $10–$20 strategic pricing</span></div>
+        <div id="grs-chart" class="viz-svg"></div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S32 DIVIDER 14.5 ============ -->
+<section class="slide divider">
+  <div class="snum">14.5</div>
+  <div class="deye">Section Five</div>
+  <div class="dtitle">Private placement</div>
+  <div class="dsub">Selling securities to a small set of qualified institutional buyers — raising capital privately, with limited disclosure and cost.</div>
+  <div class="drule"></div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S33 PRIVATE PLACEMENT + 144A ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.5</span><span class="dot"></span><span>SEC Rule 144A &amp; QIBs</span></div>
+  <h2 class="title sm">Skipping SEC registration — legally</h2>
+  <div class="cols">
+    <div class="col">
+      <ul class="clean tight">
+        <li>A <b>private placement</b> sells a security to a small set of <b>qualified institutional buyers</b> — insurers, pension &amp; investment funds.</li>
+        <li><b>Rule 144A (1990)</b> lets <b>QIBs</b> trade privately placed securities <b>without SEC registration</b> and without holding-period limits.</li>
+        <li>A <b>QIB</b> invests <b>$100M+</b> on a discretionary basis. The <b>PORTAL</b> system supports a secondary market.</li>
+        <li>Since registration is the big barrier for foreign firms, 144A is <b>attractive abroad</b>.</li>
+      </ul>
+    </div>
+    <div class="col narrow">
+      <div class="tint" style="height:100%;">
+        <span class="tag">First mover · Atlas Copco</span>
+        <p style="margin-top:12px;font-size:16px;line-height:1.45;">The Swedish engineering firm was the <b>first foreign firm</b> to use Rule 144A — raising <b>$49M</b> via an ADR placement inside a larger <b>$214M</b> euroequity issue (1990).</p>
+        <div class="stat" style="box-shadow:none;border:none;padding:0;margin-top:12px;text-align:center;">
+          <div class="n">~4,000</div><div class="l">QIBs the SEC estimates exist</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S34 PRIVATE EQUITY vs VC ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.5</span><span class="dot"></span><span>Private equity funds</span></div>
+  <h2 class="title sm">Buy, fix, and resell — or fund a startup</h2>
+  <div class="cols">
+    <div class="col">
+      <div class="card" style="height:100%;">
+        <h3 style="color:var(--cerulean);">Private equity funds</h3>
+        <ul class="clean tight">
+          <li>Limited partnerships of institutions &amp; wealthy investors (e.g., endowments).</li>
+          <li>Buy control of firms, take them <b>private</b>, improve management, resell in <b>5–7 years</b>.</li>
+          <li>Often use heavy <b>debt</b>; charge <b>2% of assets + 20% of profits</b>.</li>
+          <li>A lifeline for <b>mature emerging-market family firms</b> too small/invisible to globalize alone.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card" style="height:100%;">
+        <h3 style="color:var(--cerulean);">vs. venture capital</h3>
+        <ul class="clean tight">
+          <li>VC operates mainly in <b>highly developed</b> markets.</li>
+          <li>Invests in <b>startups</b>, aiming to exit via an <b>IPO</b>.</li>
+          <li>Little VC exists in emerging markets — hard to exit via IPO in an illiquid market.</li>
+          <li>PE invests in <b>already-profitable</b> firms and has a <b>longer horizon</b>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S35 FOREIGN EQUITY LISTING ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.5</span><span class="dot"></span><span>Why cross-list at all?</span></div>
+  <h2 class="title sm">Four reasons to list shares abroad</h2>
+  <div class="cols center">
+    <div class="col">
+      <ul class="clean">
+        <li>Improve <b>share liquidity</b> and support a secondary market for new issues.</li>
+        <li>Raise the <b>share price</b> by escaping mis-pricing in a segmented, illiquid home market.</li>
+        <li>Increase <b>visibility</b> with customers, suppliers, creditors, and host governments.</li>
+        <li>Create a liquid market for shares used to <b>acquire firms</b> and <b>pay local staff</b>.</li>
+      </ul>
+    </div>
+    <div class="col narrow">
+      <div class="tint" style="height:100%;">
+        <span class="tag gold">Case · Kosmos Energy</span>
+        <p style="margin-top:12px;font-size:16px;line-height:1.45;">After its 2011 U.S. IPO <span class="chip">NYSE: KOS</span>, Kosmos listed on the <b>Ghanaian Stock Exchange</b> — Ghana being where it made its discoveries and earned nearly all its income.</p>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S36 DIVIDER 14.6 ============ -->
+<section class="slide divider">
+  <div class="snum">14.6</div>
+  <div class="deye">Section Six</div>
+  <div class="dtitle">Raising debt globally</div>
+  <div class="dsub">International debt markets offer a wider menu of maturities, structures, and currencies than any single home market.</div>
+  <div class="drule"></div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S37 INTERNATIONAL DEBT INSTRUMENTS ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.6</span><span class="dot"></span><span>Three pools of debt · Exhibit 14.7</span></div>
+  <h2 class="title sm">Bank loans · euronotes · international bonds</h2>
+  <div class="row" style="gap:16px;flex:1;">
+    <div class="card grow"><span class="tag">Short–medium · floating</span><h3 style="margin-top:10px;">Bank Loans &amp; Syndications</h3><ul class="clean tight"><li><b>Eurocredits</b> — loans in a currency other than the lender's, priced at <b>LIBOR + spread</b>.</li><li><b>Syndicated credits</b> — large loans spread across many banks, led by a lead bank.</li></ul></div>
+    <div class="card grow"><span class="tag">Short–medium</span><h3 style="margin-top:10px;">Euronote Market</h3><ul class="clean tight"><li><b>Euronotes</b> — underwritten short-term notes.</li><li><b>Eurocommercial paper (ECP)</b> — non-underwritten, 1/3/6-month maturities.</li><li><b>EMTNs</b> — bridge the gap to bonds.</li></ul></div>
+    <div class="card grow"><span class="tag">Mid–long · fixed/floating</span><h3 style="margin-top:10px;">International Bond Market</h3><ul class="clean tight"><li><b>Eurobonds</b> — sold outside the currency's home country.</li><li><b>Foreign bonds</b> — a foreign issuer in a national market: <b>Yankee, Samurai, Bulldog</b>.</li></ul></div>
+  </div>
+  <div class="callout" style="margin-top:14px;">Next: a calculator for two of these — <b>eurocommercial paper</b> proceeds and the <b>all-in cost</b> of a syndicated eurocredit.</div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S38 TOOL 6: DEBT PRICING LAB ============ -->
+<section class="slide">
+  <div class="labtag">LIVE TOOL · 6 of 9</div>
+  <h2 class="title sm" style="margin-bottom:2px;">Global Debt Pricing Lab</h2>
+  <div class="hint" style="margin-bottom:12px;"><b>Choose an instrument</b>, then drag the sliders. See exactly how much cash a borrower actually receives — and what the financing truly costs once fees are counted.</div>
+  <div class="lab">
+    <div class="lab-grid">
+      <div class="lab-controls">
+        <div class="seg" id="dpl-mode">
+          <button data-m="ecp" class="on">Eurocommercial Paper</button>
+          <button data-m="cred">Syndicated Eurocredit</button>
+        </div>
+        <!-- ECP controls -->
+        <div id="dpl-ecp">
+          <div class="ctrl">
+            <div class="top"><span class="cl">Face value (paid at maturity)</span><span class="cv" id="dpl-face-v">$2.00M</span></div>
+            <input type="range" id="dpl-face" min="1" max="5" value="2" step="0.1">
+          </div>
+          <div class="ctrl">
+            <div class="top"><span class="cl">Days to maturity</span><span class="cv" id="dpl-days-v">60</span></div>
+            <input type="range" id="dpl-days" min="30" max="270" value="60" step="1">
+          </div>
+          <div class="ctrl">
+            <div class="top"><span class="cl">Discount yield (per year)</span><span class="cv" id="dpl-yield-v">4.60%</span></div>
+            <input type="range" id="dpl-yield" min="2" max="8" value="4.6" step="0.05">
+          </div>
+        </div>
+        <!-- Eurocredit controls -->
+        <div id="dpl-cred" style="display:none;">
+          <div class="ctrl">
+            <div class="top"><span class="cl">Loan principal</span><span class="cv" id="dpl-pr-v">$650M</span></div>
+            <input type="range" id="dpl-pr" min="100" max="1000" value="650" step="10">
+          </div>
+          <div class="ctrl">
+            <div class="top"><span class="cl">LIBOR &nbsp;(avg over year)</span><span class="cv" id="dpl-lib-v">4.10%</span></div>
+            <input type="range" id="dpl-lib" min="0" max="8" value="4.1" step="0.05">
+          </div>
+          <div class="ctrl">
+            <div class="top"><span class="cl">Credit spread</span><span class="cv" id="dpl-spr-v">80 bps</span></div>
+            <input type="range" id="dpl-spr" min="0" max="200" value="80" step="5">
+          </div>
+          <div class="ctrl">
+            <div class="top"><span class="cl">Up-front fees</span><span class="cv" id="dpl-fee-v">1.20%</span></div>
+            <input type="range" id="dpl-fee" min="0" max="3" value="1.2" step="0.05">
+          </div>
+        </div>
+        <div class="readout" id="dpl-readout"></div>
+      </div>
+      <div class="lab-viz">
+        <div class="vizhead"><span class="vt" id="dpl-vt">Eurocommercial paper</span><span class="vs" id="dpl-vs">money-market / 360-day basis</span></div>
+        <div id="dpl-chart" class="viz-svg"></div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S39 EUROBOND CHARACTERISTICS ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.6</span><span class="dot"></span><span>Why eurobonds exist</span></div>
+  <h2 class="title sm">Four forces behind the eurobond market</h2>
+  <div class="row" style="gap:16px;flex:1;">
+    <div class="card grow"><h3 style="color:var(--cerulean);">Light regulation</h3><p style="font-size:15.5px;line-height:1.45;color:var(--ink);">Bonds in a foreign currency fall <b>outside any single nation's</b> regulatory domain.</p></div>
+    <div class="card grow"><h3 style="color:var(--cerulean);">Less disclosure</h3><p style="font-size:15.5px;line-height:1.45;color:var(--ink);">Cheaper, faster to market than an SEC-registered issue.</p></div>
+  </div>
+  <div class="row" style="gap:16px;flex:1;margin-top:16px;">
+    <div class="card grow"><h3 style="color:var(--cerulean);">Favorable tax</h3><p style="font-size:15.5px;line-height:1.45;color:var(--ink);">Interest often free of withholding tax; issued in <b>bearer form</b> — tied to tax anonymity.</p></div>
+    <div class="card grow"><h3 style="color:var(--cerulean);">Ratings &amp; reputation</h3><p style="font-size:15.5px;line-height:1.45;color:var(--ink);">Issuers can withhold a poor rating, so <b>name recognition</b> drives terms — big MNEs &amp; sovereigns pay least.</p></div>
+  </div>
+  <div class="callout gold" style="margin-top:14px;">Foreign bonds carry national nicknames: <b>Yankee</b> (U.S.), <b>Samurai</b> (Japan), <b>Bulldog</b> (U.K.) — a foreign issuer borrowing in that country's currency and market.</div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S40 ISLAMIC FINANCE ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.6</span><span class="dot"></span><span>Global Finance in Practice 14.3</span></div>
+  <h2 class="title sm">Islamic finance: profit-sharing instead of interest</h2>
+  <div class="cols">
+    <div class="col">
+      <ul class="clean tight">
+        <li>Built on <b>Sharia</b> principles from the Qur'an — restricting how businesses fund themselves.</li>
+        <li>Core rules: <b>no earning interest</b>, <b>profit and loss shared</b>, <b>no speculation</b>, invest only in <b>halal</b> activities.</li>
+        <li>An Islamic bank can't pay depositors interest — depositors are effectively <b>shareholders</b> whose returns track the bank's profits.</li>
+      </ul>
+    </div>
+    <div class="col narrow">
+      <div class="tint" style="height:100%;">
+        <span class="tag">A Sharia-compliant mortgage</span>
+        <p style="margin-top:12px;font-size:15.5px;line-height:1.45;">The bank <b>buys the home</b>, then resells it to the buyer at a <b>higher price</b> payable over years. The markup is implicit interest by Western thinking — yet it conforms to Sharia.</p>
+        <div class="note" style="margin-top:10px;">In the U.S. and U.K., that markup is <b>not</b> tax-deductible the way interest is.</div>
+      </div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:12px;">Muslims are roughly one-fourth of the world's population; predominantly Islamic countries produce about 10% of global GDP.</div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S41 DIVIDER 14.7 ============ -->
+<section class="slide divider">
+  <div class="snum">14.7</div>
+  <div class="deye">Section Seven</div>
+  <div class="dtitle">Financing foreign subsidiaries</div>
+  <div class="dsub">A subsidiary has no independent cost of capital — its financing matters only as it affects the consolidated firm, shaped by local norms.</div>
+  <div class="drule"></div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S42 INTERNAL vs EXTERNAL ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.7</span><span class="dot"></span><span>Sources of funds · Exhibits 14.8–14.9</span></div>
+  <h2 class="title sm">Funding from inside — and outside — the MNE</h2>
+  <div class="cols">
+    <div class="col">
+      <div class="card" style="height:100%;">
+        <h3 style="color:var(--cerulean);">Internal (within the MNE)</h3>
+        <ul class="clean tight">
+          <li>From the <b>parent</b>: equity (cash or <b>real goods</b>), cash loans, leads &amp; lags on payables.</li>
+          <li>From <b>sister subsidiaries</b>: loans and timing of intrafirm payables.</li>
+          <li><b>Subsidiary borrowing with a parent guarantee</b>.</li>
+          <li>Generated by the subsidiary: <b>depreciation</b> and <b>retained earnings</b>.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card" style="height:100%;">
+        <h3 style="color:var(--cerulean);">External (outside the MNE)</h3>
+        <ul class="clean tight">
+          <li>Debt from the <b>parent's country</b>: banks, money &amp; security markets.</li>
+          <li>Debt from <b>outside</b>: local-currency, third-country, eurocurrency.</li>
+          <li><b>Local or global equity</b>: local shareholders, JV partners.</li>
+        </ul>
+        <div class="note" style="margin-top:10px;">MNEs usually <b>minimize equity</b> in a subsidiary to reduce capital at risk — debt is the preferred form, once the subsidiary can access it.</div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S43 HOST COUNTRY NORMS ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.7</span><span class="dot"></span><span>Whose norms? Whose interests?</span></div>
+  <h2 class="title sm">A tug-of-war over the subsidiary's balance sheet</h2>
+  <div class="cols">
+    <div class="col">
+      <ul class="clean tight">
+        <li>Financial-structure norms vary widely <b>across</b> countries, less <b>within</b> one — driven by tax, governance, bond-market depth, and more.</li>
+        <li>For the subsidiary's debt ratio, count only <b>debt from outside the MNE</b>: a <b>parent loan ≈ equity</b> to host countries (subordinated, no insolvency threat).</li>
+      </ul>
+      <div class="callout" style="margin-top:8px;font-size:15px;"><b>FX concern:</b> a startup prefers to service debt in <b>local currency</b>. &nbsp; <b>Tax concern:</b> MNEs maximize subsidiary debt for the interest deduction — so host governments <b>cap deductible debt</b>.</div>
+    </div>
+    <div class="col narrow">
+      <div class="row" style="flex-direction:column;gap:12px;height:100%;">
+        <div class="tint"><span class="tag green">Host government wants</span><ul class="clean tight" style="margin-top:8px;"><li>All <b>equity</b> funding</li><li>Profits <b>reinvested</b>, not repatriated</li></ul></div>
+        <div class="tint"><span class="tag red">The MNE wants</span><ul class="clean tight" style="margin-top:8px;"><li>All <b>debt</b> funding</li><li>Debt service as a <b>contractual</b> way to remit cash &amp; minimize equity at risk</li></ul></div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S44 SUBSIDIARY OVER TIME ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">14.7</span><span class="dot"></span><span>Three stages · Exhibit 14.10</span></div>
+  <h2 class="title sm">Financing needs change across the life cycle</h2>
+  <div class="row" style="gap:16px;flex:1;">
+    <div class="card grow"><span class="tag">Stage 1</span><h3 style="margin-top:10px;">Startup</h3><ul class="clean tight"><li>Funded almost entirely by the <b>parent</b></li><li>Mostly <b>equity</b>; debt kept low to ease cash-flow pressure</li><li>Just needs to <b>pay its bills</b></li></ul></div>
+    <div class="card grow"><span class="tag">Stage 2</span><h3 style="margin-top:10px;">Growth</h3><ul class="clean tight"><li>Capital needs rise with <b>sales</b></li><li><b>Local debt</b> becomes available as cash flow grows</li><li>Host limit: debt ≤ <b>⅓ of total capital</b></li></ul></div>
+    <div class="card grow"><span class="tag">Stage 3</span><h3 style="margin-top:10px;">Maturing</h3><ul class="clean tight"><li>Growth slows; financing needs level off</li><li><b>Retained earnings</b> build equity; profits <b>repatriated</b></li><li>Debt in many <b>maturities &amp; currencies</b></li></ul></div>
+  </div>
+  <div class="callout" style="margin-top:14px;">An MNE is the sum of its parts — and subsidiary financing is a core part. See the whole arc move on the next slide.</div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S45 TOOL 7: LIFECYCLE ============ -->
+<section class="slide">
+  <div class="labtag">LIVE TOOL · 7 of 9</div>
+  <h2 class="title sm" style="margin-bottom:2px;">Subsidiary Financing Life-Cycle Visualizer</h2>
+  <div class="hint" style="margin-bottom:12px;"><b>Drag the timeline</b> from startup to maturity. Watch total capital grow and the mix shift from mostly <b>equity</b> (blue) toward more <b>debt</b> (orange) — within the host-country comfort zone.</div>
+  <div class="lab">
+    <div class="lab-grid">
+      <div class="lab-controls">
+        <div class="ctrl">
+          <div class="top"><span class="cl">Where in the life cycle?</span><span class="cv" id="lc-stage">Startup</span></div>
+          <input type="range" id="lc-t" min="0" max="100" value="14" step="1">
+        </div>
+        <div class="readout">
+          <div class="rr"><span class="rk">Total capital need (index)</span><span class="rv" id="lc-cap">—</span></div>
+          <div class="rr"><span class="rk">Equity share</span><span class="rv" id="lc-eq" style="color:#7fd0e8;">—</span></div>
+          <div class="rr"><span class="rk">Debt share</span><span class="rv" id="lc-db" style="color:#f4b86a;">—</span></div>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <h3 id="lc-note-t" style="font-size:15px;text-transform:none;letter-spacing:0;color:var(--cerulean);margin-bottom:8px;">Startup stage</h3>
+          <p id="lc-note" style="font-size:14.5px;line-height:1.45;color:var(--ink);margin:0;">Initial debt is kept low to avoid imposing cash-flow burdens — the parent funds nearly everything with equity.</p>
+        </div>
+      </div>
+      <div class="lab-viz">
+        <div class="vizhead"><span class="vt">Capital structure over time</span><span class="vs">dashed line = ⅓ host-country debt comfort</span></div>
+        <div id="lc-chart" class="viz-svg"></div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<style>
+.ctrl-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.ctrl.mini{padding:9px 12px;}
+.ctrl.mini .top{margin-bottom:5px;}
+.ctrl.mini .cl{font-size:13px;}
+.ctrl.mini .cv{font-size:14.5px;}
+</style>
+
+<!-- ============ S46 DIVIDER CEMEX ============ -->
+<section class="slide divider">
+  <div class="snum" style="font-size:120px;">★</div>
+  <div class="deye">Mini-Case</div>
+  <div class="dtitle">CEMEX's Debt Dilemma</div>
+  <div class="dsub">An aggressive, debt-funded acquisition runs headlong into the 2008 global financial crisis — and a $5.5 billion repayment wall.</div>
+  <div class="drule"></div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S47 RINKER DEAL ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">CASE</span><span class="dot"></span><span>The Rinker acquisition</span></div>
+  <h2 class="title sm">CEMEX buys Rinker — almost entirely on short-term debt</h2>
+  <div class="cols">
+    <div class="col">
+      <ul class="clean tight">
+        <li>July 2007: CEMEX wins <b>90%</b> of Rinker at <b>$15.85/share</b> — a <b>54% premium</b> over the $10.30 pre-bid price.</li>
+        <li>Strategic fit: aggregates &amp; ready-mix, U.S. growth markets (<b>Florida, Arizona</b>), plus Australia &amp; China; <b>&gt;$400M</b> in expected synergies.</li>
+        <li>Financed with <b>$14B of new debt</b>, assuming another <b>$1.3B</b> of Rinker's debt.</li>
+        <li>CEMEX claimed the deal would <b>lower WACC from 7.9% → 6.8%</b>.</li>
+      </ul>
+    </div>
+    <div class="col narrow">
+      <div class="card" style="height:100%;display:flex;flex-direction:column;justify-content:center;">
+        <div class="stat" style="box-shadow:none;border:none;padding:0;text-align:center;margin-bottom:18px;">
+          <div class="n gold" style="font-size:52px;">+54%</div>
+          <div class="l">premium paid over Rinker's pre-bid price</div>
+        </div>
+        <div class="callout" style="font-size:14.5px;">Zambrano pledged to cut net debt below <b>2.7× EBITDA</b> within two years. The plan rested on one assumption: <b>debt markets stay open</b>.</div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S48 DEBT-TO-EBITDA ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">CASE</span><span class="dot"></span><span>The banker's yardstick</span></div>
+  <h2 class="title sm">Debt-carrying capacity = EBITDA × a multiplier</h2>
+  <div class="cols">
+    <div class="col">
+      <div class="formula">Net debt ÷ EBITDA &nbsp;= &nbsp;(STD + LTD − Cash) ÷ EBITDA<br><span class="hi">= ($1.251 + $6.289 − $1.579) ÷ $4.137 = 1.44</span></div>
+      <ul class="clean tight" style="margin-top:16px;">
+        <li>Capacity = <b>EBITDA multiplier × EBITDA</b>. For manufacturers in 2006–07, ~<b>4.0</b>×.</li>
+        <li>For cyclical housing, banks wanted to drop the multiplier to <b>2.5–3.0</b>.</li>
+        <li>2006: capacity ≈ <b>$16.5B</b> vs. net debt <b>$5.96B</b> → comfortably <b>investment grade (BBB)</b>.</li>
+      </ul>
+    </div>
+    <div class="col narrow">
+      <div class="kv card" style="height:100%;">
+        <div class="r"><span class="k">2006 EBITDA</span><span class="v">$4.137B</span></div>
+        <div class="r"><span class="k">2006 net debt</span><span class="v">$5.96B</span></div>
+        <div class="r"><span class="k">2006 ratio</span><span class="v" style="color:var(--good-d);">1.44×</span></div>
+        <div class="r"><span class="k">After Rinker (2007)</span><span class="v" style="color:var(--bad-d);">~$19.1B debt</span></div>
+        <div class="r"><span class="k">Steady-state target</span><span class="v">2.5×</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S49 TOOL 8: CAPACITY ============ -->
+<section class="slide">
+  <div class="labtag">LIVE TOOL · 8 of 9</div>
+  <h2 class="title sm" style="margin-bottom:2px;">Debt-Carrying Capacity Lab</h2>
+  <div class="hint" style="margin-bottom:12px;"><b>Tap a year</b> to see CEMEX's profile shift — or drag the sliders yourself. Watch the ratio cross the <b>2.5× covenant</b> line and tip from investment grade into speculative.</div>
+  <div class="lab">
+    <div class="lab-grid">
+      <div class="lab-controls">
+        <div class="seg" id="cap-presets">
+          <button data-y="2006" class="on">2006 · pre-Rinker</button>
+          <button data-y="2007">2007</button>
+          <button data-y="2008">2008 · crisis</button>
+        </div>
+        <div class="ctrl">
+          <div class="top"><span class="cl">EBITDA (core earnings)</span><span class="cv" id="cap-e-v">$4.14B</span></div>
+          <input type="range" id="cap-e" min="3" max="5" value="4.137" step="0.001">
+        </div>
+        <div class="ctrl">
+          <div class="top"><span class="cl">Net debt</span><span class="cv" id="cap-nd-v">$5.96B</span></div>
+          <input type="range" id="cap-nd" min="4" max="22" value="5.961" step="0.001">
+        </div>
+        <div class="ctrl">
+          <div class="top"><span class="cl">EBITDA multiplier (banks)</span><span class="cv" id="cap-m-v">4.0×</span></div>
+          <input type="range" id="cap-m" min="2" max="4.5" value="4" step="0.1">
+        </div>
+        <div class="verdict ok" id="cap-verdict"><span class="vi">✓</span><span id="cap-vtext">Investment grade — comfortable</span></div>
+      </div>
+      <div class="lab-viz">
+        <div class="vizhead"><span class="vt">Capacity vs. debt · leverage ratio</span><span class="vs">covenant line = 2.5×</span></div>
+        <div id="cap-chart" class="viz-svg"></div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S50 SEPT 2008 CRISIS ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">CASE</span><span class="dot"></span><span>September 2008 &amp; the downgrade</span></div>
+  <h2 class="title sm">The markets freeze, and the rating breaks</h2>
+  <div class="cols">
+    <div class="col">
+      <ul class="clean tight">
+        <li>Sept 2008: <b>Lehman</b> fails, <b>AIG</b> is seized — banks stop refinancing debt for everyone.</li>
+        <li>CEMEX Q3 sales: <b>Spain −26%, Mexico −10%, U.S. −25%+</b>; U.S. housing starts ≈ ¼ of two years prior.</li>
+        <li>A <b>$711M</b> FX-hedge loss is unwound; <b>$5.5B</b> of debt comes due in 2009.</li>
+        <li>The covenant (Net-Debt/EBITDA &lt; <b>2.5</b>) is breached; the August waiver lapses.</li>
+      </ul>
+    </div>
+    <div class="col narrow">
+      <div class="tint" style="height:100%;display:flex;flex-direction:column;justify-content:center;">
+        <span class="tag red">Downgrade</span>
+        <p style="margin-top:12px;font-size:16px;line-height:1.45;">End of 2008: <b>Moody's</b> and <b>Fitch</b> cut CEMEX to <b>speculative grade</b> (Ba1 / BB+).</p>
+        <div class="callout" style="margin-top:12px;font-size:14.5px;">Falling from investment to speculative grade <b>shrinks capital availability</b> and <b>raises borrowing costs</b> at the worst possible moment.</div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S51 2009 CASH FLOW PROBLEM ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">CASE</span><span class="dot"></span><span>The 2009 problem · Exhibit E</span></div>
+  <h2 class="title sm">Repeat 2008 and repay $5.5B — and the cash runs out</h2>
+  <div class="cols">
+    <div class="col">
+      <p class="lede" style="font-size:18px;">If 2008's cash flows simply repeat in 2009 <b>and</b> CEMEX repays the full <b>$5.5B</b> on schedule, it ends the year at a <b>negative $2,944M</b> balance — not financially feasible.</p>
+      <div class="callout gold" style="margin-top:14px;">The escape: <b>restructure the levers</b> and <b>refinance</b> most of the $5.5B — pushing maturities into later years while keeping creditors satisfied.</div>
+    </div>
+    <div class="col narrow">
+      <div class="card" style="height:100%;">
+        <h3>Levers CEMEX can pull</h3>
+        <ul class="clean tight">
+          <li>Cut or convert the <b>dividend</b> ($476M)</li>
+          <li><b>Sell assets</b> (Australia ~$400–500M, Hungary/Austria, Canary Islands)</li>
+          <li>Slash <b>capex</b> to maintenance only (~$700–800M)</li>
+          <li>Issue <b>new equity</b> (~$400–500M rights)</li>
+          <li><b>Refinance</b> the bulk of the $5.5B</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S52 TOOL 9: CASH FLOW SIMULATOR ============ -->
+<section class="slide">
+  <div class="labtag">LIVE TOOL · 9 of 9 · capstone</div>
+  <h2 class="title sm" style="margin-bottom:2px;">CEMEX 2009 Cash-Flow Survival Simulator</h2>
+  <div class="hint" style="margin-bottom:10px;"><b>You're CEMEX's treasurer.</b> Drag the levers to keep the year-end cash balance <b>above zero</b>. Whatever you don't repay of the $5.5B must be <b>refinanced</b> with the banks. Can you survive 2009?</div>
+  <div class="lab">
+    <div class="lab-grid">
+      <div class="lab-controls" style="flex:1.05;">
+        <div class="ctrl-grid">
+          <div class="ctrl mini"><div class="top"><span class="cl">Net income</span><span class="cv" id="cf-ni-v">166</span></div><input type="range" id="cf-ni" min="0" max="400" value="166" step="1"></div>
+          <div class="ctrl mini"><div class="top"><span class="cl">Depreciation</span><span class="cv" id="cf-dep-v">1527</span></div><input type="range" id="cf-dep" min="1200" max="1600" value="1527" step="1"></div>
+          <div class="ctrl mini"><div class="top"><span class="cl">Δ working capital</span><span class="cv" id="cf-nwc-v">722</span></div><input type="range" id="cf-nwc" min="0" max="800" value="722" step="1"></div>
+          <div class="ctrl mini"><div class="top"><span class="cl">Capex (spend)</span><span class="cv" id="cf-capex-v">1747</span></div><input type="range" id="cf-capex" min="700" max="1747" value="1747" step="1"></div>
+          <div class="ctrl mini"><div class="top"><span class="cl">Asset sales</span><span class="cv" id="cf-asset-v">747</span></div><input type="range" id="cf-asset" min="0" max="2500" value="747" step="1"></div>
+          <div class="ctrl mini"><div class="top"><span class="cl">Equity issued</span><span class="cv" id="cf-eq-v">461</span></div><input type="range" id="cf-eq" min="0" max="1000" value="461" step="1"></div>
+          <div class="ctrl mini"><div class="top"><span class="cl">Dividends (pay)</span><span class="cv" id="cf-div-v">476</span></div><input type="range" id="cf-div" min="0" max="608" value="476" step="1"></div>
+          <div class="ctrl mini"><div class="top"><span class="cl">Debt repaid '09</span><span class="cv" id="cf-debt-v">5500</span></div><input type="range" id="cf-debt" min="0" max="5500" value="5500" step="50"></div>
+        </div>
+        <div class="verdict no" id="cf-verdict" style="margin-top:4px;"><span class="vi">✕</span><span id="cf-vtext">Insolvent — cash runs out</span></div>
+        <button class="btn ghost" id="cf-reset" style="align-self:flex-start;">Reset to “2008 repeated”</button>
+      </div>
+      <div class="lab-viz">
+        <div class="vizhead"><span class="vt">2009 cash-flow waterfall ($M)</span><span class="vs">starts at $1,156M cash</span></div>
+        <div id="cf-chart" class="viz-svg" style="flex:1;"></div>
+        <div class="readout" style="margin-top:8px;">
+          <div class="rr"><span class="rk">Refinanced (pushed to later years)</span><span class="rv" id="cf-refi">$0M</span></div>
+          <div class="rr"><span class="rk">Year-end cash balance</span><span class="rv big" id="cf-end">−$2,944M</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S53 CREDITOR INTERESTS + QUESTIONS ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">CASE</span><span class="dot"></span><span>Creditors &amp; the discussion questions</span></div>
+  <h2 class="title sm">What the banks need — and what you'll be asked</h2>
+  <div class="cols">
+    <div class="col">
+      <div class="card" style="height:100%;">
+        <h3 style="color:var(--cerulean);">Creditors want three things</h3>
+        <ul class="clean tight">
+          <li>Keep the loan in <b>performing</b> status (no write-down).</li>
+          <li>Continue to earn a <b>market (risk-adjusted) rate</b>.</li>
+          <li>A <b>realistic plan</b> for full repayment.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="tint" style="height:100%;">
+        <span class="tag gold">Mini-case questions</span>
+        <ol style="margin:12px 0 0;padding-left:20px;font-size:15.5px;line-height:1.55;color:var(--ink);">
+          <li>Why did CEMEX overpay for Rinker — and what was the result?</li>
+          <li>How did falling EBITDA alter CEMEX's <b>debt-carrying capacity</b>?</li>
+          <li>What combination of actions would you recommend to meet 2009 debt service?</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S54 GLOSSARY (interactive) ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">REVIEW</span><span class="dot"></span><span>Key terms · from the glossary</span></div>
+  <h2 class="title sm" style="margin-bottom:4px;">Tap any term to reveal its plain-English meaning</h2>
+  <div class="terms" id="termgrid">
+    <div class="term"><div class="tn">Eurobond</div><div class="td">A bond sold outside the country whose currency it's in — e.g., a dollar bond sold outside the U.S.</div></div>
+    <div class="term"><div class="tn">Foreign bond</div><div class="td">A foreign issuer's bond sold inside a national market, in that country's currency — Yankee, Samurai, Bulldog.</div></div>
+    <div class="term"><div class="tn">ADR</div><div class="td">A U.S. bank certificate that stands in for foreign shares, traded in dollars on U.S. exchanges.</div></div>
+    <div class="term"><div class="tn">GDR</div><div class="td">Like an ADR, but the certificate trades outside the U.S.</div></div>
+    <div class="term"><div class="tn">GRS</div><div class="td">One identical share that trades across exchanges without conversion, priced in each market's currency.</div></div>
+    <div class="term"><div class="tn">QIB</div><div class="td">A "qualified institutional buyer" — an institution investing $100M+ that can trade private securities.</div></div>
+    <div class="term"><div class="tn">Rule 144A</div><div class="td">A 1990 SEC rule letting QIBs trade privately placed securities without SEC registration.</div></div>
+    <div class="term"><div class="tn">Private equity</div><div class="td">Investors who buy control of firms, take them private, improve them, and resell within a few years.</div></div>
+    <div class="term"><div class="tn">Euroequity</div><div class="td">An IPO sold on several countries' exchanges at the same time.</div></div>
+    <div class="term"><div class="tn">Tranche</div><div class="td">A slice of an issue allocated to underwriters for sale in their geographic market.</div></div>
+    <div class="term"><div class="tn">Free float</div><div class="td">The share of stock actually held by the public and freely traded.</div></div>
+    <div class="term"><div class="tn">Net debt</div><div class="td">Interest-bearing debt minus cash — what's owed beyond the cash on hand.</div></div>
+    <div class="term"><div class="tn">EBITDA</div><div class="td">Earnings before interest, taxes, depreciation &amp; amortization — a proxy for core cash earnings.</div></div>
+    <div class="term"><div class="tn">Investment grade</div><div class="td">A credit rating signaling reliable repayment — BBB- / Baa3 or higher.</div></div>
+    <div class="term"><div class="tn">Speculative grade</div><div class="td">A rating below investment grade (BB+ / Ba1 or lower), implying higher default risk.</div></div>
+    <div class="term"><div class="tn">Credit spread</div><div class="td">The extra interest over a benchmark a borrower pays to compensate for its credit risk.</div></div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S55 SUMMARY ============ -->
+<section class="slide">
+  <div class="eyebrow"><span class="sec">CH. 14</span><span class="dot"></span><span>Summary</span></div>
+  <h2 class="title sm">The chapter in eight ideas</h2>
+  <div class="cols" style="gap:34px;">
+    <div class="col">
+      <ul class="clean tight">
+        <li>Globalizing capital is a <b>staged journey</b> — debt first, then equity listings, then issuance.</li>
+        <li>An optimal structure minimizes <b>WACC</b>; for an MNE it's bent by <b>access, diversification, FX risk, and investor norms</b>.</li>
+        <li>An MNE's <b>marginal cost of capital</b> can stay flat across a wide budget — a domestic firm's can't.</li>
+        <li>Foreign-currency debt's true cost = <b>interest ± the currency move</b>.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="clean tight">
+        <li>Equity paths: <b>euroequity, directed issues, depositary receipts, private placement</b>.</li>
+        <li><b>DRs</b> let segmented-market firms improve liquidity and raise new shares abroad.</li>
+        <li>Debt markets offer many <b>maturities, structures, and currencies</b> — bank loans, euronotes, eurobonds.</li>
+        <li>Subsidiary structure follows <b>host-country norms</b> and shifts across the life cycle — and overreaching on debt can be fatal (CEMEX).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ S56 CLOSING ============ -->
+<section class="slide cover">
+  <div class="ceye">FIRE 473 · International Finance</div>
+  <h1 style="font-size:58px;">That's Chapter 14.</h1>
+  <div class="csub">Nine live tools you can revisit any time — drag, click, and rebuild every number for yourself.</div>
+  <div class="crule"></div>
+  <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:10px;max-width:780px;">
+    <span class="chip">WACC Curve</span><span class="chip">FX Debt Cost</span><span class="chip">Aramco Valuation</span><span class="chip">ADR Flow</span><span class="chip">ADR vs GRS</span><span class="chip">Debt Pricing</span><span class="chip">Subsidiary Life-Cycle</span><span class="chip">Debt Capacity</span><span class="chip">CEMEX Survival</span>
+  </div>
+  <div class="meta" style="margin-top:38px;">
+    <span class="m">Funding the Multinational Firm</span><span class="sepd"></span>
+    <span class="m">Eiteman · Stonehill · Moffett, 16th ed.</span>
+  </div>
+  <div class="brand">Chapter 14 · Funding the Multinational Firm</div>
+</section>
+
+<!-- ============ NAV CHROME ============ -->
+<div id="counter"><b id="cur">1</b> / <span id="total">56</span></div>
+<div class="navbar">
+  <button id="btn-prev" title="Previous (←)">‹</button>
+  <button id="btn-next" title="Next (→)">›</button>
+</div>
+<div id="progress"><div class="bar" id="progbar"></div></div>
+
+</div><!-- /#deck -->
+</div><!-- /#stage -->
+<script>
+(function(){
+"use strict";
+
+/* ============ shared helpers ============ */
+function $(id){return document.getElementById(id);}
+function pct(x,d){return (x*100).toFixed(d===undefined?2:d)+'%';}
+function fmt(n,d){return Number(n).toLocaleString('en-US',{minimumFractionDigits:d||0,maximumFractionDigits:d||0});}
+var C={cer:'#0492C2',cerD:'#036E92',cerL:'#4FB3D4',cerPale:'#DCEFF6',cerPaler:'#EEF7FB',
+       gold:'#E2912A',goldD:'#BE7818',good:'#1F9D6B',goodD:'#157A52',bad:'#D24B47',badD:'#A8332F',
+       ink:'#0B2730',slate:'#4C6670',muted:'#7E929B',line:'#D4E6EC',grid:'#EEF3F5'};
+function setV(el,cls,txt){el.className='verdict '+cls;}
+
+/* ============ scaling ============ */
+var deck=$('deck');
+function fit(){
+  var s=Math.min(window.innerWidth/1280, window.innerHeight/720);
+  deck.style.transform='scale('+s+')';
+}
+window.addEventListener('resize',fit);
+
+/* ============ navigation ============ */
+var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+var idx=0, total=slides.length;
+$('total').textContent=total;
+function show(n){
+  n=Math.max(0,Math.min(total-1,n));
+  slides[idx].classList.remove('active');
+  idx=n;
+  slides[idx].classList.add('active');
+  $('cur').textContent=idx+1;
+  $('progbar').style.width=(idx/(total-1)*100)+'%';
+}
+function next(){show(idx+1);}
+function prev(){show(idx-1);}
+$('btn-next').addEventListener('click',next);
+$('btn-prev').addEventListener('click',prev);
+document.addEventListener('keydown',function(e){
+  var ae=document.activeElement, tag=ae?ae.tagName:'';
+  if(tag==='INPUT') return;
+  if(tag==='BUTTON' && (e.key===' '||e.key==='Enter')) return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();next();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+  else if(e.key==='Home'){e.preventDefault();show(0);}
+  else if(e.key==='End'){e.preventDefault();show(total-1);}
+});
+
+/* ============ TOOL 1 — WACC curve ============ */
+function initWACC(){
+  var dS=$('wacc-d'), tS=$('wacc-t'); if(!dS) return;
+  var W=560,H=296,ml=42,mr=16,mt=14,mb=32;
+  var x0=ml,x1=W-mr,y0=H-mb,y1=mt,ymax=0.36;
+  function ke(d){return 0.150+0.20*d*d;}
+  function kdpre(d){return 0.090+0.02*d+0.55*Math.pow(d,4);}
+  function wacc(d,t){return d*kdpre(d)*(1-t)+(1-d)*ke(d);}
+  function X(d){return x0+(x1-x0)*d;}
+  function Y(v){return y0-(y0-y1)*(v/ymax);}
+  function path(fn){var p='';for(var i=0;i<=120;i++){var d=i/120;p+=(i?'L':'M')+X(d).toFixed(1)+','+Y(fn(d)).toFixed(1);}return p;}
+  function render(){
+    var d=+dS.value/100, t=+tS.value/100;
+    $('wacc-d-v').textContent=(+dS.value)+'%';
+    $('wacc-t-v').textContent=(+tS.value)+'%';
+    var e=ke(d),kaf=kdpre(d)*(1-t),w=wacc(d,t);
+    $('wacc-ke').textContent=pct(e,1);
+    $('wacc-kd').textContent=pct(kaf,1);
+    $('wacc-w').textContent=pct(w,2);
+    var v=$('wacc-verdict'),vt=$('wacc-vtext'),p=+dS.value;
+    if(p>72){v.className='verdict no';vt.textContent='Danger zone — insolvency risk dominates';}
+    else if(p>=30&&p<=50){v.className='verdict ok';vt.textContent='In the minimum-cost range (30–50%)';}
+    else{v.className='verdict warn';vt.textContent='Outside the flat minimum (30–50%)';}
+    var keP=path(ke),kdP=path(function(dd){return kdpre(dd)*(1-t);}),wP=path(function(dd){return wacc(dd,t);});
+    var s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:100%" preserveAspectRatio="xMidYMid meet">';
+    // y grid
+    for(var g=0;g<=3;g++){var yy=Y(g*0.1);s+='<line x1="'+x0+'" y1="'+yy+'" x2="'+x1+'" y2="'+yy+'" stroke="'+C.grid+'" stroke-width="1"/>';
+      s+='<text x="'+(x0-6)+'" y="'+(yy+3)+'" font-size="10" fill="'+C.muted+'" text-anchor="end" font-family="monospace">'+(g*10)+'%</text>';}
+    // min band 30-50
+    s+='<rect x="'+X(.30)+'" y="'+y1+'" width="'+(X(.50)-X(.30))+'" height="'+(y0-y1)+'" fill="'+C.cerPale+'" opacity=".55"/>';
+    s+='<text x="'+((X(.30)+X(.50))/2)+'" y="'+(y1+13)+'" font-size="10" fill="'+C.cerD+'" text-anchor="middle" font-family="monospace">min range</text>';
+    // x ticks
+    for(var xt=0;xt<=100;xt+=20){s+='<text x="'+X(xt/100)+'" y="'+(y0+16)+'" font-size="10" fill="'+C.muted+'" text-anchor="middle" font-family="monospace">'+xt+'</text>';}
+    s+='<text x="'+((x0+x1)/2)+'" y="'+(H-2)+'" font-size="10.5" fill="'+C.slate+'" text-anchor="middle">Debt ratio (D / V), %</text>';
+    // axes
+    s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x1+'" y2="'+y0+'" stroke="'+C.line+'" stroke-width="1.5"/>';
+    // curves
+    s+='<path d="'+kdP+'" fill="none" stroke="'+C.cerL+'" stroke-width="2.5"/>';
+    s+='<path d="'+keP+'" fill="none" stroke="'+C.gold+'" stroke-width="2.5"/>';
+    s+='<path d="'+wP+'" fill="none" stroke="'+C.cerD+'" stroke-width="3.5"/>';
+    // marker
+    var mx=X(d),my=Y(w);
+    s+='<line x1="'+mx+'" y1="'+y0+'" x2="'+mx+'" y2="'+my+'" stroke="'+C.cerD+'" stroke-width="1.2" stroke-dasharray="3 3"/>';
+    s+='<circle cx="'+mx+'" cy="'+my+'" r="6" fill="'+C.cerD+'" stroke="#fff" stroke-width="2"/>';
+    // legend
+    s+='<g font-size="10.5" font-family="monospace">';
+    s+='<rect x="'+(x1-150)+'" y="'+(y1+2)+'" width="11" height="3" fill="'+C.gold+'"/><text x="'+(x1-135)+'" y="'+(y1+8)+'" fill="'+C.slate+'">cost of equity</text>';
+    s+='<rect x="'+(x1-150)+'" y="'+(y1+16)+'" width="11" height="3" fill="'+C.cerL+'"/><text x="'+(x1-135)+'" y="'+(y1+22)+'" fill="'+C.slate+'">after-tax debt</text>';
+    s+='<rect x="'+(x1-150)+'" y="'+(y1+30)+'" width="11" height="4" fill="'+C.cerD+'"/><text x="'+(x1-135)+'" y="'+(y1+37)+'" fill="'+C.slate+'">WACC</text>';
+    s+='</g>';
+    s+='</svg>';
+    $('wacc-chart').innerHTML=s;
+  }
+  dS.addEventListener('input',render); tS.addEventListener('input',render); render();
+}
+
+/* ============ TOOL 2 — FX debt cost ============ */
+function initFX(){
+  var iS=$('fx-i'), eS=$('fx-e'), tS=$('fx-t'); if(!iS) return;
+  var S0=1.5000;
+  var presets=$('fx-presets').querySelectorAll('button');
+  presets.forEach(function(b){b.addEventListener('click',function(){
+    presets.forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on'); eS.value=b.getAttribute('data-e'); render();
+  });});
+  function syncPreset(){var val=(+eS.value).toFixed(4);presets.forEach(function(b){b.classList.toggle('on',b.getAttribute('data-e')===val);});}
+  function render(){
+    var kf=(+iS.value)/100, end=+eS.value, t=(+tS.value)/100;
+    $('fx-i-v').textContent=(+iS.value).toFixed(2)+'%';
+    $('fx-e-v').textContent=end.toFixed(4);
+    $('fx-t-v').textContent=(+tS.value)+'%';
+    var s=(S0-end)/end;
+    var kh=(1+kf)*(1+s)-1;
+    var aft=kh*(1-t);
+    var fxpart=kh-kf;
+    $('fx-nom').textContent=pct(kf,2);
+    $('fx-cur').textContent=(s>=0?'+':'')+pct(s,2);
+    $('fx-eff').textContent=pct(kh,3);
+    $('fx-aft').textContent=pct(aft,3);
+    var v=$('fx-verdict'),vt=$('fx-vtext');
+    if(end<S0-1e-9){v.className='verdict warn';v.querySelector('.vi').textContent='↑';vt.textContent='Franc appreciated — debt got more expensive';}
+    else if(end>S0+1e-9){v.className='verdict ok';v.querySelector('.vi').textContent='↓';vt.textContent='Franc depreciated — debt got cheaper';}
+    else{v.className='verdict ok';v.querySelector('.vi').textContent='=';vt.textContent='No currency change — cost equals the interest rate';}
+    // bar viz
+    var W=560,H=130,ml=12,mr=14,top=18;
+    var xmax=Math.max(0.16, kh*1.18, kf*1.3);
+    var bx0=ml, bx1=W-mr;
+    function BX(v){return bx0+(bx1-bx0)*(v/xmax);}
+    var g='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block" preserveAspectRatio="xMidYMid meet">';
+    // axis ticks
+    for(var k=0;k<=xmax+1e-9;k+=0.04){g+='<line x1="'+BX(k)+'" y1="'+top+'" x2="'+BX(k)+'" y2="'+(H-22)+'" stroke="'+C.grid+'" stroke-width="1"/>';
+      g+='<text x="'+BX(k)+'" y="'+(H-8)+'" font-size="9.5" fill="'+C.muted+'" text-anchor="middle" font-family="monospace">'+(k*100).toFixed(0)+'%</text>';}
+    // true cost bar (robust to negative cost when the franc depreciates)
+    var by=top+8, bh=30;
+    var kfX=BX(kf), khX=Math.max(bx0,Math.min(bx1,BX(kh)));
+    g+='<text x="'+ml+'" y="'+(top+4)+'" font-size="10.5" fill="'+C.slate+'">True dollar cost vs. the interest you expected</text>';
+    if(kh>=kf){
+      g+='<rect x="'+bx0+'" y="'+by+'" width="'+(kfX-bx0)+'" height="'+bh+'" rx="3" fill="'+C.cer+'"/>';
+      g+='<rect x="'+kfX+'" y="'+by+'" width="'+Math.max(0,khX-kfX)+'" height="'+bh+'" fill="'+C.bad+'" opacity=".85"/>';
+      g+='<rect x="'+bx0+'" y="'+by+'" width="'+Math.max(0,khX-bx0)+'" height="'+bh+'" rx="3" fill="none" stroke="'+C.badD+'" stroke-width="1.5"/>';
+      g+='<text x="'+(khX+6)+'" y="'+(by+bh/2+4)+'" font-size="12.5" fill="'+C.badD+'" font-family="monospace" font-weight="700">'+pct(kh,2)+'</text>';
+    } else {
+      g+='<rect x="'+bx0+'" y="'+by+'" width="'+Math.max(0,khX-bx0)+'" height="'+bh+'" rx="3" fill="'+C.cer+'"/>';
+      g+='<rect x="'+khX+'" y="'+by+'" width="'+Math.max(0,kfX-khX)+'" height="'+bh+'" fill="'+C.good+'" opacity=".3"/>';
+      g+='<rect x="'+bx0+'" y="'+by+'" width="'+(kfX-bx0)+'" height="'+bh+'" rx="3" fill="none" stroke="'+C.cerD+'" stroke-width="1.5"/>';
+      g+='<text x="'+(kfX+6)+'" y="'+(by+bh/2+4)+'" font-size="12.5" fill="'+C.goodD+'" font-family="monospace" font-weight="700">'+pct(kh,2)+'</text>';
+    }
+    g+='<line x1="'+kfX+'" y1="'+(by-5)+'" x2="'+kfX+'" y2="'+(by+bh+5)+'" stroke="'+C.ink+'" stroke-width="1.5" stroke-dasharray="3 2"/>';
+    g+='<text x="'+kfX+'" y="'+(by+bh+16)+'" font-size="10" fill="'+C.ink+'" text-anchor="middle" font-family="monospace">interest '+pct(kf,1)+'</text>';
+    g+='</svg>';
+    $('fx-chart').innerHTML=g;
+  }
+  iS.addEventListener('input',function(){render();});
+  eS.addEventListener('input',function(){syncPreset();render();});
+  tS.addEventListener('input',render);
+  render();
+}
+
+/* ============ TOOL 3 — Aramco valuation ============ */
+function initAramco(){
+  var methodBtns=$('ar-method'); if(!methodBtns) return;
+  var btns=methodBtns.querySelectorAll('button');
+  var method='pe';
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    btns.forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+    method=b.getAttribute('data-m');
+    $('ar-pe-ctrls').style.display=method==='pe'?'':'none';
+    $('ar-dy-ctrls').style.display=method==='dy'?'':'none';
+    render();
+  });});
+  var eS=$('ar-e'),peS=$('ar-pe'),dS=$('ar-d'),yS=$('ar-y');
+  function render(){
+    var val; // in $B
+    if(method==='pe'){
+      var E=+eS.value, pe=+peS.value;
+      $('ar-e-v').textContent='$'+E+'B'; $('ar-pe-v').textContent=pe.toFixed(1)+'×';
+      val=E*pe;
+    } else {
+      var D=+dS.value, y=+yS.value;
+      $('ar-d-v').textContent='$'+D+'B'; $('ar-y-v').textContent=y.toFixed(1)+'%';
+      val=D/(y/100);
+    }
+    var T=val/1000;
+    var v=$('ar-verdict'),vt=$('ar-vtext');
+    if(val>=2000){v.className='verdict ok';vt.textContent='Reaches MbS\u2019s $2.0T target';}
+    else if(val>=1700){v.className='verdict warn';vt.textContent='Above consensus, short of the $2T target';}
+    else{v.className='verdict no';vt.textContent='Below the $1.7T market consensus';}
+    // horizontal valuation track
+    var W=560,H=300,ml=20,mr=20,vmax=2600;
+    var x0=ml,x1=W-mr;
+    function X(b){return x0+(x1-x0)*(b/vmax);}
+    var trackY=170, trackH=44;
+    var g='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:100%" preserveAspectRatio="xMidYMid meet">';
+    // big number
+    g+='<text x="'+(W/2)+'" y="70" font-size="56" fill="'+(val>=2000?C.goodD:(val>=1700?C.goldD:C.badD))+'" text-anchor="middle" font-family="monospace" font-weight="700">$'+T.toFixed(2)+'T</text>';
+    g+='<text x="'+(W/2)+'" y="98" font-size="12.5" fill="'+C.slate+'" text-anchor="middle">implied valuation \u00b7 '+(method==='pe'?'price-to-earnings':'dividend yield')+' method</text>';
+    // track base
+    g+='<rect x="'+x0+'" y="'+trackY+'" width="'+(x1-x0)+'" height="'+trackH+'" rx="8" fill="#F1F7FA" stroke="'+C.line+'"/>';
+    // value fill
+    g+='<rect x="'+x0+'" y="'+trackY+'" width="'+(X(Math.min(val,vmax))-x0)+'" height="'+trackH+'" rx="8" fill="'+(val>=2000?C.good:(val>=1700?C.gold:C.cer))+'"/>';
+    // target lines
+    function marker(b,lbl,col,anchor,dx){var mx=X(b);
+      g+='<line x1="'+mx+'" y1="'+(trackY-22)+'" x2="'+mx+'" y2="'+(trackY+trackH+8)+'" stroke="'+col+'" stroke-width="2" stroke-dasharray="4 3"/>';
+      g+='<text x="'+(mx+dx)+'" y="'+(trackY-26)+'" font-size="11" fill="'+col+'" text-anchor="'+anchor+'" font-family="monospace" font-weight="700">'+lbl+'</text>';}
+    marker(1700,'$1.7T consensus',C.cerD,'end',-5);
+    marker(2000,'$2.0T target',C.goldD,'start',5);
+    // scale ticks
+    for(var tk=0;tk<=2500;tk+=500){var tx=X(tk);g+='<text x="'+tx+'" y="'+(trackY+trackH+24)+'" font-size="10" fill="'+C.muted+'" text-anchor="middle" font-family="monospace">$'+(tk/1000).toFixed(1)+'T</text>';}
+    g+='</svg>';
+    $('ar-chart').innerHTML=g;
+  }
+  [eS,peS,dS,yS].forEach(function(s){s.addEventListener('input',render);});
+  render();
+}
+
+/* ============ TOOL 4 — ADR flow animator ============ */
+function initADR(){
+  var modeBtns=$('adr-mode'); if(!modeBtns) return;
+  var arrows=['arrIU','arrUL','arrLC','arrCD','arrDU'];
+  var boxes=['bx-investor','bx-usbroker','bx-depbank','bx-localbroker','bx-custodian'];
+  var seq={
+    issue:[
+      {a:'arrIU',b:['bx-investor','bx-usbroker'],t:'Investor places the order',d:'The U.S. investor instructs a broker to buy shares in the publicly traded Brazilian company.'},
+      {a:'arrUL',b:['bx-usbroker','bx-localbroker'],t:'Order routed to Brazil',d:'The U.S. broker contacts a local broker in Brazil and places the order.'},
+      {a:'arrLC',b:['bx-localbroker','bx-custodian'],t:'Shares bought & deposited',d:'The Brazilian broker buys the ordinary shares and delivers them to a custodian bank in Brazil.'},
+      {a:'arrUL',b:['bx-usbroker','bx-localbroker'],t:'Dollars converted to reais',d:'The U.S. broker converts the investor\u2019s dollars into reais to pay for the shares.'},
+      {a:'arrCD',b:['bx-custodian','bx-depbank'],t:'Custodian notifies depositary',d:'The same day, the custodian notifies the U.S. depositary bank that the shares are on deposit.'},
+      {a:'arrDU',b:['bx-depbank','bx-usbroker'],t:'Depositary issues the ADRs',d:'The U.S. depositary bank issues and delivers the depositary receipts to the U.S. broker.'},
+      {a:'arrIU',b:['bx-usbroker','bx-investor'],t:'ADRs delivered to investor',d:'The broker hands the ADRs to the investor \u2014 they now trade like any U.S. stock.'}
+    ],
+    cancel:[
+      {a:'arrIU',b:['bx-investor','bx-usbroker'],t:'Investor instructs a sale',d:'The ADR holder tells a broker to sell, cancelling the receipts.'},
+      {a:'arrDU',b:['bx-usbroker','bx-depbank'],t:'ADRs returned for cancellation',d:'The U.S. broker delivers the ADRs back to the depositary bank to be cancelled.'},
+      {a:'arrCD',b:['bx-depbank','bx-custodian'],t:'Depositary releases the shares',d:'The depositary instructs the custodian in Brazil to release the underlying shares.'},
+      {a:'arrLC',b:['bx-custodian','bx-localbroker'],t:'Shares sold locally',d:'The custodian releases the shares; the local broker sells them in the Brazilian market.'},
+      {a:'arrUL',b:['bx-localbroker','bx-usbroker'],t:'Proceeds converted & paid',d:'Reais are converted to dollars and the proceeds are paid to the investor.'}
+    ]
+  };
+  var mode='issue', step=0;
+  function clearHi(){
+    arrows.forEach(function(id){var e=$(id);e.classList.remove('on');e.setAttribute('marker-end','url(#adr-ah0)');});
+    boxes.forEach(function(id){$(id).querySelector('rect').classList.remove('on');});
+  }
+  function render(){
+    var arr=seq[mode], st=arr[step];
+    clearHi();
+    var ae=$(st.a); ae.classList.add('on'); ae.setAttribute('marker-end','url(#adr-ah)');
+    st.b.forEach(function(id){$(id).querySelector('rect').classList.add('on');});
+    $('adr-step-no').textContent='Step '+(step+1)+' / '+arr.length;
+    $('adr-step-title').textContent=st.t;
+    $('adr-step-desc').textContent=st.d;
+    $('adr-prev').disabled=(step===0);
+    $('adr-next').textContent=(step===arr.length-1)?'Restart \u21ba':'Next step \u203a';
+  }
+  $('adr-next').addEventListener('click',function(){var arr=seq[mode]; step=(step>=arr.length-1)?0:step+1; render();});
+  $('adr-prev').addEventListener('click',function(){if(step>0){step--;render();}});
+  modeBtns.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){
+    modeBtns.querySelectorAll('button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+    mode=b.getAttribute('data-m'); step=0;
+    $('adr-mkt-title').textContent=mode==='issue'?'Standard issuance':'Cancellation';
+    render();
+  });});
+  render();
+}
+
+/* ============ TOOL 5 — ADR vs GRS pricing ============ */
+function initGRS(){
+  var pS=$('grs-p'),rS=$('grs-r'),nS=$('grs-n'); if(!pS) return;
+  function render(){
+    var p=+pS.value,r=+rS.value,n=+nS.value;
+    $('grs-p-v').textContent='\u20ac'+p.toFixed(2);
+    $('grs-r-v').textContent='$'+r.toFixed(2);
+    $('grs-n-v').textContent=n+'\u00d7';
+    var grs=p*r, adr=grs*n;
+    $('grs-grs').textContent='$'+grs.toFixed(2);
+    $('grs-adr').textContent='$'+adr.toFixed(2);
+    var inZone=adr>=10&&adr<=20;
+    var v=$('grs-verdict'),vi=v.querySelector('.vi'),vt=$('grs-vtext');
+    if(inZone){v.className='verdict ok';vi.textContent='\u2713';vt.textContent='ADR is inside the $10\u2013$20 strategic zone';}
+    else if(adr<10){v.className='verdict warn';vi.textContent='\u2193';vt.textContent='ADR too cheap \u2014 bundle more shares per ADR';}
+    else{v.className='verdict warn';vi.textContent='\u2191';vt.textContent='ADR too pricey \u2014 bundle fewer shares per ADR';}
+    var W=520,H=300,pmax=Math.max(30,adr*1.1,grs*1.1),mt=20,mb=20;
+    var y0=H-mb,y1=mt;
+    function Y(v){return y0-(y0-y1)*(v/pmax);}
+    var lx=130, lw=110;
+    var g='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:100%" preserveAspectRatio="xMidYMid meet">';
+    g+='<rect x="'+lx+'" y="'+Y(20)+'" width="'+lw+'" height="'+(Y(10)-Y(20))+'" fill="'+C.cerPale+'" opacity=".75"/>';
+    g+='<text x="'+(lx+lw/2)+'" y="'+((Y(10)+Y(20))/2+4)+'" font-size="11" fill="'+C.cerD+'" text-anchor="middle" font-family="monospace">$10\u2013$20 zone</text>';
+    var step=pmax>60?20:(pmax>30?10:5);
+    for(var t=0;t<=pmax;t+=step){var yy=Y(t);g+='<line x1="'+(lx-6)+'" y1="'+yy+'" x2="'+(lx+lw+6)+'" y2="'+yy+'" stroke="'+C.grid+'" stroke-width="1"/>';
+      g+='<text x="'+(lx-12)+'" y="'+(yy+3)+'" font-size="10" fill="'+C.muted+'" text-anchor="end" font-family="monospace">$'+t.toFixed(0)+'</text>';}
+    g+='<rect x="'+lx+'" y="'+y1+'" width="'+lw+'" height="'+(y0-y1)+'" fill="none" stroke="'+C.line+'" stroke-width="1"/>';
+    function mark(v,lbl,col,side){var yy=Y(Math.min(v,pmax));var mx=side<0?lx:lx+lw;
+      g+='<circle cx="'+mx+'" cy="'+yy+'" r="6" fill="'+col+'" stroke="#fff" stroke-width="2"/>';
+      g+='<text x="'+(mx+side*12)+'" y="'+(yy+4)+'" font-size="12.5" fill="'+col+'" text-anchor="'+(side<0?'end':'start')+'" font-family="monospace" font-weight="700">'+lbl+' $'+v.toFixed(2)+'</text>';}
+    mark(grs,'GRS',C.slate,-1);
+    mark(adr,'ADR',inZone?C.goodD:C.goldD,1);
+    g+='</svg>';
+    $('grs-chart').innerHTML=g;
+  }
+  [pS,rS,nS].forEach(function(s){s.addEventListener('input',render);}); render();
+}
+
+/* ============ TOOL 6 — global debt pricing ============ */
+function initDPL(){
+  var modeBtns=$('dpl-mode'); if(!modeBtns) return;
+  var mode='ecp';
+  var faceS=$('dpl-face'),daysS=$('dpl-days'),yS=$('dpl-yield');
+  var prS=$('dpl-pr'),libS=$('dpl-lib'),sprS=$('dpl-spr'),feeS=$('dpl-fee');
+  function renderECP(){
+    var face=(+faceS.value)*1e6, days=+daysS.value, y=(+yS.value)/100;
+    $('dpl-face-v').textContent='$'+(+faceS.value).toFixed(2)+'M';
+    $('dpl-days-v').textContent=days;
+    $('dpl-yield-v').textContent=(+yS.value).toFixed(2)+'%';
+    var proceeds=face/(1+y*days/360);
+    var disc=face-proceeds;
+    var annual=(disc/proceeds)*(360/days);
+    $('dpl-readout').innerHTML=
+      '<div class="rr"><span class="rk">Cash received today</span><span class="rv big">$'+fmt(proceeds,0)+'</span></div>'+
+      '<div class="rr"><span class="rk">Repaid at maturity (face)</span><span class="rv">$'+fmt(face,0)+'</span></div>'+
+      '<div class="rr"><span class="rk">Discount = financing cost</span><span class="rv">$'+fmt(disc,0)+'</span></div>';
+    var W=560,H=300,ml=30,mr=30;
+    var bx0=ml,bx1=W-mr,by=120,bh=60;
+    var pX=bx0+(bx1-bx0)*(proceeds/face);
+    var g='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:100%" preserveAspectRatio="xMidYMid meet">';
+    g+='<text x="'+(W/2)+'" y="44" font-size="13" fill="'+C.slate+'" text-anchor="middle">The borrower repays the whole bar at maturity \u2014</text>';
+    g+='<text x="'+(W/2)+'" y="64" font-size="13" fill="'+C.slate+'" text-anchor="middle">but only receives the blue part today.</text>';
+    g+='<rect x="'+bx0+'" y="'+by+'" width="'+(pX-bx0)+'" height="'+bh+'" rx="6" fill="'+C.cer+'"/>';
+    g+='<rect x="'+pX+'" y="'+by+'" width="'+(bx1-pX)+'" height="'+bh+'" rx="0" fill="'+C.gold+'"/>';
+    g+='<rect x="'+bx0+'" y="'+by+'" width="'+(bx1-bx0)+'" height="'+bh+'" rx="6" fill="none" stroke="'+C.cerD+'" stroke-width="1.5"/>';
+    g+='<text x="'+((bx0+pX)/2)+'" y="'+(by+bh/2-4)+'" font-size="12" fill="#fff" text-anchor="middle" font-family="monospace" font-weight="700">$'+fmt(proceeds,0)+'</text>';
+    g+='<text x="'+((bx0+pX)/2)+'" y="'+(by+bh/2+13)+'" font-size="10.5" fill="#fff" text-anchor="middle">received today</text>';
+    // discount leader
+    var dcx=(pX+bx1)/2;
+    g+='<line x1="'+dcx+'" y1="'+by+'" x2="'+dcx+'" y2="'+(by-22)+'" stroke="'+C.goldD+'" stroke-width="1.2"/>';
+    g+='<text x="'+bx1+'" y="'+(by-26)+'" font-size="11" fill="'+C.goldD+'" text-anchor="end" font-family="monospace" font-weight="700">discount $'+fmt(disc,0)+'</text>';
+    g+='<text x="'+(W/2)+'" y="'+(by+bh+30)+'" font-size="12.5" fill="'+C.ink+'" text-anchor="middle">Repay full face of <tspan font-family="monospace" font-weight="700">$'+fmt(face,0)+'</tspan> after '+days+' days</text>';
+    g+='<text x="'+(W/2)+'" y="'+(by+bh+54)+'" font-size="12" fill="'+C.cerD+'" text-anchor="middle" font-family="monospace">annualized cost \u2248 '+pct(annual,2)+'</text>';
+    g+='</svg>';
+    $('dpl-chart').innerHTML=g;
+  }
+  function renderCred(){
+    var P=(+prS.value)*1e6, lib=(+libS.value)/100, spr=(+sprS.value)/10000, fee=(+feeS.value)/100;
+    $('dpl-pr-v').textContent='$'+(+prS.value)+'M';
+    $('dpl-lib-v').textContent=(+libS.value).toFixed(2)+'%';
+    $('dpl-spr-v').textContent=(+sprS.value)+' bps';
+    $('dpl-fee-v').textContent=(+feeS.value).toFixed(2)+'%';
+    var interest=P*(lib+spr), feeAmt=P*fee, net=P-feeAmt;
+    var feeRate=feeAmt/net, allIn=(interest+feeAmt)/net;
+    $('dpl-readout').innerHTML=
+      '<div class="rr"><span class="rk">Net cash received</span><span class="rv">$'+fmt(net,0)+'</span></div>'+
+      '<div class="rr"><span class="rk">Year-1 interest</span><span class="rv">$'+fmt(interest,0)+'</span></div>'+
+      '<div class="rr"><span class="rk">Up-front fees</span><span class="rv">$'+fmt(feeAmt,0)+'</span></div>'+
+      '<div class="rr"><span class="rk">All-in first-year cost</span><span class="rv big">'+pct(allIn,3)+'</span></div>';
+    var W=560,H=300,ml=24,mr=24,xmax=Math.max(0.08,allIn*1.18);
+    var bx0=ml,bx1=W-mr,by=150,bh=54;
+    function BX(v){return bx0+(bx1-bx0)*(v/xmax);}
+    var g='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:100%" preserveAspectRatio="xMidYMid meet">';
+    g+='<text x="'+(W/2)+'" y="48" font-size="13" fill="'+C.slate+'" text-anchor="middle">Stacking the true cost of a floating-rate loan</text>';
+    for(var k=0;k<=xmax+1e-9;k+=0.02){g+='<line x1="'+BX(k)+'" y1="'+(by-14)+'" x2="'+BX(k)+'" y2="'+(by+bh+14)+'" stroke="'+C.grid+'" stroke-width="1"/>';
+      g+='<text x="'+BX(k)+'" y="'+(by+bh+30)+'" font-size="10" fill="'+C.muted+'" text-anchor="middle" font-family="monospace">'+(k*100).toFixed(0)+'%</text>';}
+    var seg=[[lib,C.cer,'LIBOR'],[spr,C.cerL,'spread'],[feeRate,C.gold,'fees']];
+    var acc=0;
+    seg.forEach(function(p){var w=BX(acc+p[0])-BX(acc);
+      g+='<rect x="'+BX(acc)+'" y="'+by+'" width="'+w+'" height="'+bh+'" fill="'+p[1]+'"/>';
+      if(w>34){g+='<text x="'+(BX(acc)+w/2)+'" y="'+(by+bh/2+4)+'" font-size="11" fill="#fff" text-anchor="middle" font-family="monospace">'+p[2]+'</text>';}
+      acc+=p[0];});
+    g+='<rect x="'+bx0+'" y="'+by+'" width="'+(BX(allIn)-bx0)+'" height="'+bh+'" fill="none" stroke="'+C.cerD+'" stroke-width="1.5" rx="3"/>';
+    g+='<line x1="'+BX(allIn)+'" y1="'+(by-18)+'" x2="'+BX(allIn)+'" y2="'+(by+bh)+'" stroke="'+C.cerD+'" stroke-width="1.5"/>';
+    g+='<text x="'+BX(allIn)+'" y="'+(by-22)+'" font-size="13" fill="'+C.cerD+'" text-anchor="middle" font-family="monospace" font-weight="700">all-in '+pct(allIn,2)+'</text>';
+    g+='<text x="'+(W/2)+'" y="'+(by+bh+54)+'" font-size="11" fill="'+C.muted+'" text-anchor="middle" font-style="italic">fees shown charged to year 1; amortizing them over the loan\u2019s life lowers the rate</text>';
+    g+='</svg>';
+    $('dpl-chart').innerHTML=g;
+  }
+  function render(){ if(mode==='ecp') renderECP(); else renderCred(); }
+  modeBtns.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){
+    modeBtns.querySelectorAll('button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+    mode=b.getAttribute('data-m');
+    $('dpl-ecp').style.display=mode==='ecp'?'':'none';
+    $('dpl-cred').style.display=mode==='cred'?'':'none';
+    $('dpl-vt').textContent=mode==='ecp'?'Eurocommercial paper':'Syndicated eurocredit';
+    $('dpl-vs').textContent=mode==='ecp'?'money-market / 360-day basis':'floating rate, first-year cost';
+    render();
+  });});
+  [faceS,daysS,yS,prS,libS,sprS,feeS].forEach(function(s){s.addEventListener('input',render);}); render();
+}
+
+/* ============ TOOL 7 — subsidiary life-cycle ============ */
+function initLC(){
+  var tS=$('lc-t'); if(!tS) return;
+  function T(x){return 0.12+0.88/(1+Math.exp(-12*(x-0.5)));}
+  function frac(x){return 0.08+0.40/(1+Math.exp(-10*(x-0.55)));}
+  function render(){
+    var x=(+tS.value)/100, tot=T(x), f=frac(x);
+    var stage,noteT,note;
+    if(x<0.34){stage='Startup';noteT='Startup stage';note='Initial debt is kept low to avoid cash-flow burdens \u2014 the parent funds nearly everything with equity.';}
+    else if(x<0.67){stage='Growth';noteT='Growth stage';note='Capital needs climb with sales. As cash flow proves out, local debt becomes increasingly available.';}
+    else{stage='Maturing';noteT='Maturing stage';note='Growth slows. Retained earnings build equity, profits are repatriated, and debt comes in many maturities and currencies.';}
+    $('lc-stage').textContent=stage;
+    $('lc-cap').textContent=(tot*100).toFixed(0);
+    $('lc-eq').textContent=((1-f)*100).toFixed(0)+'%';
+    $('lc-db').textContent=(f*100).toFixed(0)+'%';
+    $('lc-note-t').textContent=noteT;
+    $('lc-note').textContent=note+(f>0.3334?'  Debt is now past the \u2153 host-country comfort line.':'');
+    var W=560,H=300,ml=30,mr=18,mt=18,mb=42, ymax=1.06;
+    var x0=ml,x1=W-mr,y0=H-mb,y1=mt;
+    function X(xx){return x0+(x1-x0)*xx;}
+    function Y(v){return y0-(y0-y1)*(v/ymax);}
+    var N=80, eqPts=[], totPts=[];
+    for(var i=0;i<=N;i++){var xx=i/N,tt=T(xx),ff=frac(xx);eqPts.push([X(xx),Y(tt*(1-ff))]);totPts.push([X(xx),Y(tt)]);}
+    var eqArea='M'+x0+','+y0;eqPts.forEach(function(p){eqArea+='L'+p[0].toFixed(1)+','+p[1].toFixed(1);});eqArea+='L'+x1+','+y0+'Z';
+    var debtArea='';totPts.forEach(function(p,i){debtArea+=(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1);});
+    for(var j=eqPts.length-1;j>=0;j--){debtArea+='L'+eqPts[j][0].toFixed(1)+','+eqPts[j][1].toFixed(1);}debtArea+='Z';
+    var comp='';for(var k=0;k<=N;k++){var cx=k/N;comp+=(k?'L':'M')+X(cx).toFixed(1)+','+Y(T(cx)*(2/3)).toFixed(1);}
+    var g='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:100%" preserveAspectRatio="xMidYMid meet">';
+    // stage bands
+    g+='<rect x="'+X(0)+'" y="'+y1+'" width="'+(X(1/3)-X(0))+'" height="'+(y0-y1)+'" fill="'+C.cerPaler+'"/>';
+    g+='<rect x="'+X(2/3)+'" y="'+y1+'" width="'+(X(1)-X(2/3))+'" height="'+(y0-y1)+'" fill="'+C.cerPaler+'"/>';
+    // areas
+    g+='<path d="'+eqArea+'" fill="rgba(79,179,212,.55)" stroke="'+C.cerD+'" stroke-width="1.5"/>';
+    g+='<path d="'+debtArea+'" fill="rgba(226,145,42,.5)" stroke="'+C.goldD+'" stroke-width="1.5"/>';
+    // comfort line
+    g+='<path d="'+comp+'" fill="none" stroke="'+C.badD+'" stroke-width="1.4" stroke-dasharray="5 4"/>';
+    g+='<text x="'+(X(.5))+'" y="'+(Y(T(.5)*2/3)-5)+'" font-size="9.5" fill="'+C.badD+'" text-anchor="middle" font-family="monospace">\u2153 debt comfort</text>';
+    // stage dividers + labels
+    [1/3,2/3].forEach(function(d){g+='<line x1="'+X(d)+'" y1="'+y1+'" x2="'+X(d)+'" y2="'+y0+'" stroke="'+C.line+'" stroke-width="1" stroke-dasharray="2 3"/>';});
+    g+='<text x="'+X(1/6)+'" y="'+(y0+15)+'" font-size="10.5" fill="'+C.slate+'" text-anchor="middle">Startup</text>';
+    g+='<text x="'+X(1/2)+'" y="'+(y0+15)+'" font-size="10.5" fill="'+C.slate+'" text-anchor="middle">Growth</text>';
+    g+='<text x="'+X(5/6)+'" y="'+(y0+15)+'" font-size="10.5" fill="'+C.slate+'" text-anchor="middle">Maturing</text>';
+    g+='<text x="'+X(1/2)+'" y="'+(H-2)+'" font-size="10" fill="'+C.muted+'" text-anchor="middle" font-style="italic">time \u2192 (orange = debt, blue = equity)</text>';
+    // current marker
+    var mx=X(x), eqY=Y(tot*(1-f)), tY=Y(tot);
+    g+='<line x1="'+mx+'" y1="'+y0+'" x2="'+mx+'" y2="'+tY+'" stroke="'+C.cerD+'" stroke-width="1.6"/>';
+    g+='<circle cx="'+mx+'" cy="'+eqY+'" r="4.5" fill="#fff" stroke="'+C.cerD+'" stroke-width="2"/>';
+    g+='<circle cx="'+mx+'" cy="'+tY+'" r="4.5" fill="'+C.cerD+'" stroke="#fff" stroke-width="2"/>';
+    g+='</svg>';
+    $('lc-chart').innerHTML=g;
+  }
+  tS.addEventListener('input',render); render();
+}
+
+/* ============ TOOL 8 — debt-carrying capacity ============ */
+function initCAP(){
+  var eS=$('cap-e'),ndS=$('cap-nd'),mS=$('cap-m'); if(!eS) return;
+  var presets={'2006':{e:4.137,nd:5.961,m:4.0},'2007':{e:4.591,nd:19.1,m:3.0},'2008':{e:3.565,nd:18.0,m:2.5}};
+  var pbtns=$('cap-presets').querySelectorAll('button');
+  pbtns.forEach(function(b){b.addEventListener('click',function(){
+    pbtns.forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+    var p=presets[b.getAttribute('data-y')]; eS.value=p.e; ndS.value=p.nd; mS.value=p.m; render();
+  });});
+  function render(){
+    var e=+eS.value, nd=+ndS.value, m=+mS.value;
+    $('cap-e-v').textContent='$'+e.toFixed(2)+'B';
+    $('cap-nd-v').textContent='$'+nd.toFixed(2)+'B';
+    $('cap-m-v').textContent=m.toFixed(1)+'\u00d7';
+    var cap=m*e, ratio=nd/e, head=cap-nd;
+    var v=$('cap-verdict'),vi=v.querySelector('.vi'),vt=$('cap-vtext');
+    if(ratio<=2.5){v.className='verdict ok';vi.textContent='\u2713';vt.textContent='Investment grade \u2014 within the 2.5\u00d7 covenant';}
+    else if(ratio<=3.5){v.className='verdict warn';vi.textContent='!';vt.textContent='Covenant breached \u2014 stretched, near speculative';}
+    else{v.className='verdict no';vi.textContent='\u2715';vt.textContent='Speculative grade \u2014 well over the covenant';}
+    var W=560,H=300;
+    var g='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:100%" preserveAspectRatio="xMidYMid meet">';
+    var ml=98,mr=24,bmax=Math.max(cap,nd,1)*1.15;
+    function BX(v){return ml+(W-mr-ml)*(v/bmax);}
+    var r1=40;
+    g+='<text x="'+(ml-8)+'" y="'+(r1+16)+'" font-size="11.5" fill="'+C.slate+'" text-anchor="end">Debt capacity</text>';
+    g+='<rect x="'+ml+'" y="'+r1+'" width="'+(BX(cap)-ml)+'" height="24" rx="4" fill="'+C.cerL+'"/>';
+    g+='<text x="'+(BX(cap)+6)+'" y="'+(r1+17)+'" font-size="11.5" fill="'+C.cerD+'" font-family="monospace" font-weight="700">$'+cap.toFixed(1)+'B</text>';
+    var r2=r1+38;
+    g+='<text x="'+(ml-8)+'" y="'+(r2+16)+'" font-size="11.5" fill="'+C.slate+'" text-anchor="end">Net debt</text>';
+    var ndcol=nd<=cap?C.cer:C.bad, ndtx=nd<=cap?C.cerD:C.badD;
+    g+='<rect x="'+ml+'" y="'+r2+'" width="'+(BX(nd)-ml)+'" height="24" rx="4" fill="'+ndcol+'"/>';
+    g+='<text x="'+(BX(nd)+6)+'" y="'+(r2+17)+'" font-size="11.5" fill="'+ndtx+'" font-family="monospace" font-weight="700">$'+nd.toFixed(1)+'B</text>';
+    g+='<text x="'+ml+'" y="'+(r2+44)+'" font-size="11.5" fill="'+(head>=0?C.goodD:C.badD)+'" font-family="monospace">headroom: '+(head>=0?'+':'\u2212')+'$'+Math.abs(head).toFixed(1)+'B</text>';
+    // ratio gauge
+    var gy=190, gh=28, rmax=6;
+    function GX(v){return ml+(W-mr-ml)*(Math.min(v,rmax)/rmax);}
+    g+='<text x="'+(ml-8)+'" y="'+(gy+18)+'" font-size="11.5" fill="'+C.slate+'" text-anchor="end">Net debt / EBITDA</text>';
+    g+='<rect x="'+GX(0)+'" y="'+gy+'" width="'+(GX(2.5)-GX(0))+'" height="'+gh+'" fill="#d8f0e6"/>';
+    g+='<rect x="'+GX(2.5)+'" y="'+gy+'" width="'+(GX(3.5)-GX(2.5))+'" height="'+gh+'" fill="#fcefd6"/>';
+    g+='<rect x="'+GX(3.5)+'" y="'+gy+'" width="'+(GX(rmax)-GX(3.5))+'" height="'+gh+'" fill="#f7dcdb"/>';
+    g+='<rect x="'+GX(0)+'" y="'+gy+'" width="'+(GX(rmax)-GX(0))+'" height="'+gh+'" fill="none" stroke="'+C.line+'"/>';
+    g+='<line x1="'+GX(2.5)+'" y1="'+(gy-10)+'" x2="'+GX(2.5)+'" y2="'+(gy+gh+6)+'" stroke="'+C.ink+'" stroke-width="2" stroke-dasharray="4 3"/>';
+    g+='<text x="'+GX(2.5)+'" y="'+(gy-14)+'" font-size="10.5" fill="'+C.ink+'" text-anchor="middle" font-family="monospace">2.5\u00d7 covenant</text>';
+    var px=GX(ratio);
+    g+='<polygon points="'+px+','+(gy+gh+3)+' '+(px-7)+','+(gy+gh+15)+' '+(px+7)+','+(gy+gh+15)+'" fill="'+C.cerD+'"/>';
+    g+='<text x="'+px+'" y="'+(gy+gh+32)+'" font-size="14" fill="'+C.cerD+'" text-anchor="middle" font-family="monospace" font-weight="700">'+ratio.toFixed(2)+'\u00d7</text>';
+    g+='</svg>';
+    $('cap-chart').innerHTML=g;
+  }
+  render();
+}
+
+/* ============ TOOL 9 — CEMEX 2009 cash-flow waterfall ============ */
+function initCF(){
+  if(!$('cf-ni')) return;
+  var defs={'cf-ni':166,'cf-dep':1527,'cf-nwc':722,'cf-capex':1747,'cf-asset':747,'cf-eq':461,'cf-div':476,'cf-debt':5500};
+  function render(){
+    var ni=+$('cf-ni').value, dep=+$('cf-dep').value, nwc=+$('cf-nwc').value, capex=+$('cf-capex').value,
+        asset=+$('cf-asset').value, eq=+$('cf-eq').value, div=+$('cf-div').value, debt=+$('cf-debt').value;
+    $('cf-ni-v').textContent=ni; $('cf-dep-v').textContent=dep; $('cf-nwc-v').textContent=nwc;
+    $('cf-capex-v').textContent=capex; $('cf-asset-v').textContent=asset; $('cf-eq-v').textContent=eq;
+    $('cf-div-v').textContent=div; $('cf-debt-v').textContent=debt;
+    var start=1156;
+    var inc=[['Net inc.',ni],['Deprec.',dep],['\u0394 NWC',nwc],['Capex',-capex],['Asset sales',asset],['Debt repaid',-debt],['Equity',eq],['Dividends',-div]];
+    var cols=[{l:'Start',t:'tot',v:start}], run=start;
+    inc.forEach(function(s){var before=run; run+=s[1]; cols.push({l:s[0],t:'inc',d:s[1],b:before,a:run});});
+    var end=run; cols.push({l:'End',t:'tot',v:end});
+    var refi=5500-debt;
+    $('cf-refi').textContent='$'+fmt(refi,0)+'M';
+    var endEl=$('cf-end'); endEl.textContent=(end<0?'\u2212$':'$')+fmt(Math.abs(end),0)+'M';
+    endEl.style.color=end>=0?'#bdf0a8':'#ffb3b0';
+    var v=$('cf-verdict'),vi=v.querySelector('.vi'),vt=$('cf-vtext');
+    if(end>=0){v.className='verdict ok';vi.textContent='\u2713';vt.textContent=(refi>500?'Solvent \u2014 survived by refinancing $'+fmt(refi,0)+'M':'Solvent \u2014 positive year-end cash');}
+    else{v.className='verdict no';vi.textContent='\u2715';vt.textContent='Insolvent \u2014 cash runs out; refinance more debt';}
+    var W=600,H=320,ml=16,mr=8,mt=18,mb=44;
+    var x0=ml,x1=W-mr,y0=H-mb,yT=mt;
+    var allv=[0]; cols.forEach(function(c){ if(c.t==='tot'){allv.push(c.v);} else {allv.push(c.b);allv.push(c.a);} });
+    var lo=Math.min.apply(null,allv), hi=Math.max.apply(null,allv);
+    if(hi-lo<200){hi+=100;lo-=100;}
+    var pad=(hi-lo)*0.08; hi+=pad; lo-=pad;
+    function Y(val){return y0-(y0-yT)*((val-lo)/(hi-lo));}
+    var n=cols.length, slot=(x1-x0)/n, bw=slot*0.58;
+    var g='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:100%" preserveAspectRatio="xMidYMid meet">';
+    g+='<line x1="'+x0+'" y1="'+Y(0)+'" x2="'+x1+'" y2="'+Y(0)+'" stroke="'+C.ink+'" stroke-width="1.5"/>';
+    g+='<text x="'+x1+'" y="'+(Y(0)-4)+'" font-size="9.5" fill="'+C.muted+'" text-anchor="end" font-family="monospace">$0</text>';
+    cols.forEach(function(c,i){
+      var cx=x0+slot*i+slot/2, bx=cx-bw/2, top,bot,col;
+      if(c.t==='tot'){
+        top=Y(Math.max(0,c.v)); bot=Y(Math.min(0,c.v));
+        col=(i===0)?C.cerD:(c.v>=0?C.good:C.bad);
+      } else {
+        top=Y(Math.max(c.b,c.a)); bot=Y(Math.min(c.b,c.a));
+        col=(c.d>=0)?C.good:C.bad;
+        g+='<line x1="'+(x0+slot*(i-1)+slot/2+bw/2)+'" y1="'+Y(c.b)+'" x2="'+bx+'" y2="'+Y(c.b)+'" stroke="'+C.muted+'" stroke-width="1" stroke-dasharray="2 2" opacity=".6"/>';
+      }
+      g+='<rect x="'+bx+'" y="'+top+'" width="'+bw+'" height="'+Math.max(2,bot-top)+'" rx="2" fill="'+col+'" opacity="'+(c.t==='tot'?1:.85)+'"/>';
+      g+='<text x="'+cx+'" y="'+(y0+14)+'" font-size="8.6" fill="'+C.slate+'" text-anchor="middle">'+c.l+'</text>';
+      var amt=(c.t==='tot')?c.v:c.d;
+      g+='<text x="'+cx+'" y="'+(y0+25)+'" font-size="8" fill="'+C.muted+'" text-anchor="middle" font-family="monospace">'+(amt>=0?'+':'\u2212')+fmt(Math.abs(amt),0)+'</text>';
+    });
+    g+='</svg>';
+    $('cf-chart').innerHTML=g;
+  }
+  Object.keys(defs).forEach(function(id){ $(id).addEventListener('input',render); });
+  $('cf-reset').addEventListener('click',function(){ Object.keys(defs).forEach(function(id){ $(id).value=defs[id]; }); render(); });
+  render();
+}
+
+/* ============ glossary term cards ============ */
+function initTerms(){
+  var grid=$('termgrid'); if(!grid) return;
+  grid.querySelectorAll('.term').forEach(function(t){ t.addEventListener('click',function(){ t.classList.toggle('open'); }); });
+}
+
+/* ============ init all tools (each isolated) ============ */
+function initTools(){
+  [initWACC,initFX,initAramco,initADR,initGRS,initDPL,initLC,initCAP,initCF,initTerms].forEach(function(fn){
+    try{ fn(); }catch(err){ if(window.console&&console.error){ console.error('tool init failed:', err); } }
+  });
+}
+
+/* ============ boot (cold-load guard) ============ */
+function boot(){ fit(); show(0); initTools(); }
+if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', boot); }
+else { boot(); }
+
+})();
+</script>
+</body>
+</html>
